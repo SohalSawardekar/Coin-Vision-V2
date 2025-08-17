@@ -42,6 +42,7 @@ const NoteConditionPage = () => {
 	const [loading, setLoading] = useState(false)
 	const [data, setData] = useState<ConditionData | null>(null)
 	const [rawResponse, setRawResponse] = useState<string>('')
+	const [notNote, setNotNote] = useState(false);
 
 	const handleRecognize = async () => {
 		if (!file) return;
@@ -54,6 +55,20 @@ const NoteConditionPage = () => {
 		setRawResponse('');
 
 		try {
+			// Step 1: Verify image
+			const res1 = await fetch("/api/recognise", {
+				method: 'POST',
+				body: formData,
+			});
+			const res1Data = await res1.json();
+
+			if (res1Data.result !== "True") {
+				setNotNote(true);
+				setRawResponse("This is not a currency note.");
+				console.log(res1Data)
+				return;
+			}
+
 			const res = await fetch("/api/note-condition", {
 				method: "POST",
 				body: formData,
@@ -152,13 +167,18 @@ const NoteConditionPage = () => {
 					</div>
 				</div>
 				<div className="flex justify-center">
-					<div className="bg-[#27324b] p-6 rounded-3xl w-full min-h-[60dvh] overflow-y-auto">
+					<div className="bg-[#27324b] p-6 rounded-3xl w-full min-h-[60dvh]">
 						<div className="flex justify-center items-center mb-6">
 							<p className="font-bold text-white text-2xl text-center">Assessment Results</p>
 							{loading && <Loader2 className="ml-3 text-blue-400 animate-spin" size={24} />}
 						</div>
-
-						{!data && !rawResponse ? (
+						{notNote && (
+							<div className="flex flex-col justify-center items-center h-[70%] text-center">
+								<Banknote className="mb-4 text-gray-400" size={48} />
+								<p className="text-gray-400">This is not a currency note.</p>
+							</div>
+						)}
+						{!notNote && !data && !rawResponse ? (
 							<div className="flex flex-col justify-center items-center h-[70%] text-center">
 								<Banknote className="mb-4 text-gray-400" size={48} />
 								<p className="text-gray-400 text-center">Upload a currency note image to assess its condition</p>
@@ -167,7 +187,7 @@ const NoteConditionPage = () => {
 						) : data ? (
 							<ConditionDetails data={data} />
 						) : (
-							<div className="bg-[#1a2332] p-4 rounded-xl">
+							<div className="bg-[#1a2332] p-3 rounded-xl">
 								<h3 className="mb-3 font-semibold text-white text-lg">Basic Assessment</h3>
 								<p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{rawResponse}</p>
 							</div>
