@@ -1,9 +1,7 @@
-import React from 'react'
+import { redirect } from 'next/navigation'
 
 const Currency = () => {
-  return (
-	<div>Currency</div>
-  )
+	redirect('/currency/recognise')
 }
 
 export default Currency

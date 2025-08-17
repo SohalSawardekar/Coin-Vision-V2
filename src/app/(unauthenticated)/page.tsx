@@ -296,7 +296,10 @@ const LandingPage = () => {
 						<div className='flex flex-col justify-center items-center w-full'>
 							<div className="flex items-center space-x-3 mb-4">
 								<div className="flex justify-center items-center bg-gradient-to-br from-[#636fac] to-[#4c5899] rounded-xl w-10 h-10">
-									<span className="font-bold text-white text-lg">CV</span>
+									<span className='flex flex-row font-bold text-white text-xl'>
+										<p>C</p>
+										<p className='text-[#1d254d]'>V</p>
+									</span>
 								</div>
 								<h3 className="font-bold text-xl">Coin <span className="text-[#636fac]">Vision</span></h3>
 							</div>

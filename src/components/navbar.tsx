@@ -42,6 +42,20 @@ const NavBar = () => {
 	const supabase = useMemo(() => createClient(), [])
 	const router = useRouter()
 	const pathname = usePathname()
+	const [userData, setUserData] = React.useState<any>(null)
+
+	React.useEffect(() => {
+		const fetchUser = async () => {
+			const { data: { user }, error } = await supabase.auth.getUser()
+			if (error) {
+				console.error('Error fetching user:', error)
+			} else {
+				console.log('User fetched successfully:', user)
+				setUserData(user)
+			}
+		}
+		fetchUser()
+	}, [supabase])
 
 	const handleLogOut = async () => {
 		const { error } = await supabase.auth.signOut()
@@ -55,7 +69,7 @@ const NavBar = () => {
 			<div className='mx-auto px-6 py-4 max-w-7xl'>
 				<div className='flex justify-between items-center'>
 					{/* Logo Section */}
-					<div className='flex items-center space-x-2'>
+					<div className='flex items-center space-x-2 hover:cursor-default select-none'>
 						<div className='flex justify-center items-center bg-gradient-to-br from-[#636fac] to-[#4c5899] shadow-lg rounded-xl w-10 h-10'>
 							<span className='flex flex-row font-bold text-white text-xl'>
 								<p>C</p>
@@ -75,7 +89,8 @@ const NavBar = () => {
 					<div className='hidden md:flex items-center space-x-1 bg-white/5 backdrop-blur-sm p-2 rounded-2xl'>
 						{navBtns.map((data, index) => {
 							const Icon = data.icon
-							const isActive = data.path === pathname
+							const isActive =
+								pathname === data.path || pathname.startsWith(data.path + "/");
 
 							return (
 								<Link
@@ -108,12 +123,12 @@ const NavBar = () => {
 						<DropdownMenu>
 							<DropdownMenuTrigger className='group flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-xl transition-all duration-200'>
 								<Avatar className="ring-2 ring-white/20 ring-offset-2 ring-offset-transparent w-8 h-8">
-									<AvatarImage src="https://github.com/shadcn.png" />
-									<AvatarFallback className="bg-gradient-to-br from-[#636fac] to-[#4c5899] font-semibold text-white">CV</AvatarFallback>
+									<AvatarImage src={`${userData?.user_metadata?.avatar_url}`} />
+									<AvatarFallback className="bg-gradient-to-br from-[#636fac] to-[#4c5899] font-semibold text-white">{userData?.user_metadata?.name[0].toString()}</AvatarFallback>
 								</Avatar>
 								<div className="hidden sm:flex flex-col items-start">
-									<span className="font-medium text-white text-sm">John Doe</span>
-									<span className="text-white/50 text-xs">john@example.com</span>
+									<span className="font-medium text-white text-sm">{userData?.user_metadata?.name}</span>
+									<span className="text-white/50 text-xs">{userData?.user_metadata?.email}</span>
 								</div>
 								<ChevronDown size={16} className="text-white/50 group-hover:text-white transition-colors duration-200" />
 							</DropdownMenuTrigger>
