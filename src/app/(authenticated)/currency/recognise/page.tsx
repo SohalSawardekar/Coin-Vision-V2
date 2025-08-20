@@ -191,7 +191,7 @@ const Currency = () => {
 
 const CurrencyDetails = ({ data, geminiLoading }: { data: CurrencyData; geminiLoading: boolean }) => {
 	const gemini = data.geminiData;
-
+	const [more, setMore] = useState(false);
 	return (
 		<div className="space-y-4 text-white">
 			{/* Main Prediction */}
@@ -273,7 +273,7 @@ const CurrencyDetails = ({ data, geminiLoading }: { data: CurrencyData; geminiLo
 			)}
 
 			{/* Security Features */}
-			{gemini?.security_features && gemini.security_features.length > 0 && (
+			{more && gemini?.security_features && gemini.security_features.length > 0 && (
 				<div className="bg-[#1a2332] p-4 rounded-xl">
 					<h3 className="flex items-center mb-3 font-semibold text-lg">
 						<Shield className="mr-2" size={20} />
@@ -291,7 +291,7 @@ const CurrencyDetails = ({ data, geminiLoading }: { data: CurrencyData; geminiLo
 			)}
 
 			{/* Physical Properties */}
-			{gemini && (gemini.material || gemini.color_scheme) && (
+			{more && gemini && (gemini.material || gemini.color_scheme) && (
 				<div className="bg-[#1a2332] p-4 rounded-xl">
 					<h3 className="flex items-center mb-3 font-semibold text-lg">
 						<Info className="mr-2" size={20} />
@@ -315,7 +315,7 @@ const CurrencyDetails = ({ data, geminiLoading }: { data: CurrencyData; geminiLo
 			)}
 
 			{/* Description */}
-			{gemini?.description && gemini.description !== "Not available" && (
+			{more && gemini?.description && gemini.description !== "Not available" && (
 				<div className="bg-[#1a2332] p-4 rounded-xl">
 					<h3 className="mb-3 font-semibold text-lg">Description</h3>
 					<p className="text-gray-300 text-sm leading-relaxed">{gemini.description}</p>
@@ -323,7 +323,7 @@ const CurrencyDetails = ({ data, geminiLoading }: { data: CurrencyData; geminiLo
 			)}
 
 			{/* Historical Information */}
-			{gemini?.historical_info && gemini.historical_info !== "Not available" && (
+			{more && gemini?.historical_info && gemini.historical_info !== "Not available" && (
 				<div className="bg-[#1a2332] p-4 rounded-xl">
 					<h3 className="flex items-center mb-3 font-semibold text-lg">
 						<Calendar className="mr-2" size={20} />
@@ -332,6 +332,17 @@ const CurrencyDetails = ({ data, geminiLoading }: { data: CurrencyData; geminiLo
 					<p className="text-gray-300 text-sm leading-relaxed">{gemini.historical_info}</p>
 				</div>
 			)}
+
+			{!geminiLoading && (
+				<>
+					{more ? (
+						<Button onClick={() => setMore(false)}>Show Less</Button>
+					) : (
+						<Button onClick={() => setMore(true)}>Show More</Button>
+					)}
+				</>
+			)}
+
 		</div>
 	)
 }

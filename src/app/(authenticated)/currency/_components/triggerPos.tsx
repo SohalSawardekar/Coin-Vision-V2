@@ -23,7 +23,7 @@ export function ContentWithBlur({ children }: { children: React.ReactNode }) {
 		<div
 			className={clsx(
 				"flex-1 transition-all duration-300",
-				open && "blur-md pointer-events-none" // blur + disable clicks
+				open && "lg:blur-md lg:pointer-events-none" // blur + disable clicks
 			)}
 		>
 			{children}
