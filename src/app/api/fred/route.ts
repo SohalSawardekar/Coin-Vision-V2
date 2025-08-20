@@ -11,7 +11,6 @@ export async function GET(req: Request) {
 		const res = await fetch(url);
 		if (!res.ok) throw new Error(`FRED error: ${res.status}`);
 		const data = await res.json();
-		console.log(data)
 		return NextResponse.json(data);
 	} catch (err: any) {
 		return NextResponse.json({ error: err.message }, { status: 500 });

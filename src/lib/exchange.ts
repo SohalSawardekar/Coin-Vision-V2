@@ -9,7 +9,6 @@ export async function fetchExchangeRates(base: string) {
 		const r = await fetch(url, { cache: "no-store" });
 		if (!r.ok) throw new Error("fx latest failed");
 		const j = await r.json();
-		console.log("Exchange rates:", j);
 		return j.conversion_rates as Record<string, number>;
 	} catch (e) {
 		console.error(e);

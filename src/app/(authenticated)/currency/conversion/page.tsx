@@ -219,7 +219,6 @@ const CurrencyConverter = () => {
 			const result = await response.json();
 
 			setPredictionResult(result);
-			console.log('Prediction result:', result);
 
 			// Step 3: Get detailed information
 			if (result.prediction && result.status === 'success') {

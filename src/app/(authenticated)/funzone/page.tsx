@@ -14,14 +14,14 @@ const FunZone = () => {
 
 				<div className="flex flex-col gap-4">
 					<Link
-						href="/quiz"
+						href="/funzone/quiz"
 						className="bg-gradient-to-r from-purple-500 hover:from-blue-500 to-blue-500 hover:to-purple-500 shadow-lg hover:shadow-purple-500/50 px-6 py-3 rounded-lg font-semibold transition-all duration-300"
 					>
 						🧠 Currency Quiz Challenge
 					</Link>
 
 					<Link
-						href="/redesign"
+						href="/funzone/generate-currency"
 						className="bg-gradient-to-r from-pink-500 hover:from-orange-500 to-orange-500 hover:to-pink-500 shadow-lg hover:shadow-pink-500/50 px-6 py-3 rounded-lg font-semibold transition-all duration-300"
 					>
 						🎨 Redesign Currency

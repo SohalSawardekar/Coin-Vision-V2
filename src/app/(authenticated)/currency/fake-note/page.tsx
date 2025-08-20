@@ -69,7 +69,6 @@ const FakeNoteDetection = () => {
 			if (res1Data.result !== "True") {
 				setNotNote(true);
 				setRawResponse("This is not a currency note.");
-				console.log(res1Data)
 				return;
 			}
 

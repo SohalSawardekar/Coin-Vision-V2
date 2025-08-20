@@ -51,7 +51,6 @@ const NavBar = () => {
 			if (error) {
 				console.error('Error fetching user:', error)
 			} else {
-				console.log('User fetched successfully:', user)
 				setUserData(user)
 			}
 		}

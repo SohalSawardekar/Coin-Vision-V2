@@ -31,13 +31,13 @@ export default function RecognitionDetails({
 		);
 	}
 
-	if (prediction.status === "error") {
-		return (
-			<div className="bg-amber-50 p-4 border border-amber-200 rounded-2xl text-amber-800 text-sm">
-				{prediction.prediction}
-			</div>
-		);
-	}
+	// if (prediction.status === "error") {
+	// 	return (
+	// 		<div className="bg-amber-50 p-4 border border-amber-200 rounded-2xl text-amber-800 text-sm">
+	// 			{prediction.prediction}
+	// 		</div>
+	// 	);
+	// }
 
 	return (
 		<div className="space-y-3 bg-white/5 p-4 border border-white/10 rounded-2xl">

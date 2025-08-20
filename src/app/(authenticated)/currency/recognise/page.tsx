@@ -54,7 +54,6 @@ const Currency = () => {
 			if (res1Data.result !== "True") {
 				setData({ prediction: "This is not a currency note." });
 				setNotNote(true);
-				console.log(res1Data)
 				return;
 			}
 
@@ -69,7 +68,6 @@ const Currency = () => {
 
 			// Set initial result
 			setData(result);
-			console.log('Prediction result:', result);
 
 			// Step 3: Get detailed information from Gemini API
 			if (result.prediction) {
