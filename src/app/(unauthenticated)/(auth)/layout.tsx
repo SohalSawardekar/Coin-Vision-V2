@@ -6,7 +6,6 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
 	const {
 		data: { session },
-		error,
 	} = await supabase.auth.getSession()
 
 	if (session) {

@@ -2,13 +2,11 @@ import {
 	SidebarInset,
 	SidebarProvider,
 	SidebarTrigger,
-	useSidebar,
 } from "@/components/ui/sidebar"
 import { AppSidebar } from "./_components/sidebar"
 import { Separator } from "@/components/ui/separator"
 import React from "react"
 import { ContentWithBlur, MainContent } from "./_components/triggerPos"
-import clsx from "clsx"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (

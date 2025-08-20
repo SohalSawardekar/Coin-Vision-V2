@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useState } from "react";
 import { Image as ImageIcon, Upload, X } from "lucide-react";
 
 export default function ImageUpload({
-	file,
 	setFile,
 }: {
 	file: File | null;

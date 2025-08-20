@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 import { Button } from '@/components/ui/button'
 import { useFileUpload } from '@/hooks/use-file-upload'
 import {
 	AlertCircleIcon,
 	Banknote,
-	ImageIcon,
 	Loader2,
 	UploadIcon,
 	XIcon,

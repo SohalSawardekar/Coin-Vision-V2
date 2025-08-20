@@ -9,10 +9,7 @@ import { useState } from "react"
 import { createClient } from "@/utils/supabase/client"
 import { useRouter } from "next/navigation"
 
-const RegisterPage = ({
-	className,
-	...props
-}: React.ComponentProps<"form">) => {
+const RegisterPage = () => {
 	const [loading, setLoading] = useState(false)
 	const [showPassword, setShowPassword] = useState(false)
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -83,6 +80,7 @@ const RegisterPage = ({
 				}
 			}
 		} catch (err) {
+			console.error('Registration error:', err)
 			setError('An unexpected error occurred')
 		} finally {
 			setLoading(false)
@@ -92,7 +90,7 @@ const RegisterPage = ({
 	return (
 		<div className="w-[60%]">
 			<form
-				className={cn("flex flex-col gap-6 bg-gradient-to-b from-[#343e72] to-[#232844] shadow-slate-100 shadow-xs p-[3rem] rounded-3xl text-white", className)}
+				className={cn("flex flex-col gap-6 bg-gradient-to-b from-[#343e72] to-[#232844] shadow-slate-100 shadow-xs p-[3rem] rounded-3xl text-white")}
 				onSubmit={handleRegister}
 			>
 				<div className="flex flex-col items-center gap-2 text-center">

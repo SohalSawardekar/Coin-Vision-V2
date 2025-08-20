@@ -15,9 +15,7 @@ type LoginForm = {
 	password: string
 }
 
-export default function LoginForm({
-	className,
-}: React.ComponentProps<"div">) { // Changed from "form" to "div"
+export default function LoginForm() { // Changed from "form" to "div"
 	const supabase = createClient()
 	const router = useRouter()
 	const [loading, setLoading] = useState(false)
@@ -34,7 +32,7 @@ export default function LoginForm({
 		setError(null)
 
 		try {
-			const { data, error } = await supabase.auth.signInWithPassword({
+			const { error } = await supabase.auth.signInWithPassword({
 				email: formData.email, // Use actual form data
 				password: formData.password, // Use actual form data
 			})
@@ -62,7 +60,7 @@ export default function LoginForm({
 		setError(null)
 
 		try {
-			const { data, error } = await supabase.auth.signInWithOAuth({
+			const { error } = await supabase.auth.signInWithOAuth({
 				provider: "google",
 				options: {
 					redirectTo: `${window.location.origin}/api/auth/callback`
@@ -86,7 +84,6 @@ export default function LoginForm({
 			<div
 				className={cn(
 					"flex flex-col gap-6 bg-gradient-to-b from-[#343e72] to-[#232844] shadow-slate-100 shadow-xs p-[3rem] rounded-3xl text-white",
-					className
 				)}
 			>
 				<div className="flex flex-col items-center gap-2 text-center">

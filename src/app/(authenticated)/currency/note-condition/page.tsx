@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 import { Button } from '@/components/ui/button'
 import { useFileUpload } from '@/hooks/use-file-upload'
@@ -12,7 +13,6 @@ import {
 	AlertTriangle,
 	XCircle,
 	Star,
-	TrendingDown,
 	TrendingUp,
 	DollarSign,
 	Eye,
@@ -101,41 +101,6 @@ const NoteConditionPage = () => {
 		} finally {
 			setLoading(false);
 		}
-	}
-
-	const getConditionColor = (condition: string) => {
-		const lowerCondition = condition.toLowerCase();
-		if (lowerCondition.includes('excellent') || lowerCondition.includes('uncirculated') || lowerCondition.includes('mint')) {
-			return 'text-green-400';
-		} else if (lowerCondition.includes('very fine') || lowerCondition.includes('good')) {
-			return 'text-blue-400';
-		} else if (lowerCondition.includes('fine') || lowerCondition.includes('fair')) {
-			return 'text-yellow-400';
-		} else if (lowerCondition.includes('poor') || lowerCondition.includes('damaged')) {
-			return 'text-red-400';
-		}
-		return 'text-gray-300';
-	}
-
-	const getConditionIcon = (condition: string) => {
-		const lowerCondition = condition.toLowerCase();
-		if (lowerCondition.includes('excellent') || lowerCondition.includes('uncirculated')) {
-			return <CheckCircle className="text-green-400" size={24} />;
-		} else if (lowerCondition.includes('good') || lowerCondition.includes('very fine')) {
-			return <Star className="text-blue-400" size={24} />;
-		} else if (lowerCondition.includes('fair') || lowerCondition.includes('fine')) {
-			return <AlertTriangle className="text-yellow-400" size={24} />;
-		} else if (lowerCondition.includes('poor') || lowerCondition.includes('damaged')) {
-			return <XCircle className="text-red-400" size={24} />;
-		}
-		return <Eye className="text-gray-400" size={24} />;
-	}
-
-	const getScoreColor = (score: number) => {
-		if (score >= 80) return 'text-green-400';
-		if (score >= 60) return 'text-blue-400';
-		if (score >= 40) return 'text-yellow-400';
-		return 'text-red-400';
 	}
 
 	return (

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 "use client"
 
 import { AlertCircleIcon, ImageIcon, UploadIcon, XIcon, Loader2, Banknote, Globe, Calendar, Shield, Info } from "lucide-react"

@@ -1,4 +1,3 @@
-// For App Router (app/api/gemini-currency/route.ts)
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 

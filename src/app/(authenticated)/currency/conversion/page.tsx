@@ -1,9 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 import React, { useState, useEffect } from 'react'
 import {
 	AlertCircle,
 	ArrowRightLeft,
-	Image,
 	Loader2,
 	Upload,
 	X,
@@ -12,14 +12,12 @@ import {
 	Calculator,
 	TrendingUp,
 	Globe,
-	Shield,
 	RefreshCw,
 	Camera,
 	BarChart3,
-	Activity,
 	Info
 } from 'lucide-react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts'
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts'
 
 interface PredictionResult {
 	status: string;
@@ -34,11 +32,6 @@ interface CurrencyData {
 	country: string;
 	symbol: string;
 	description: string;
-}
-
-interface ExchangeRate {
-	rate: number;
-	timestamp: string;
 }
 
 interface ConversionData {
@@ -96,7 +89,6 @@ const CurrencyConverter = () => {
 			if (!parsed) return;
 
 			// Mock Gemini API call for currency details
-			const prompt = `Provide detailed information about ${parsed.currency_code} ${parsed.denomination} currency note including country, official name, symbol, and brief description. Format as JSON.`;
 
 			// Simulate API call
 			await new Promise(resolve => setTimeout(resolve, 1000));
@@ -283,6 +275,7 @@ const CurrencyConverter = () => {
 				fetchHistoricalData(currencyData.currency_code, targetCurrency);
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [targetCurrency]);
 
 	const resetApp = () => {
@@ -607,7 +600,7 @@ const ConversionResults = ({
 								/>
 								<Tooltip
 									labelFormatter={(value) => new Date(value).toLocaleDateString()}
-									formatter={(value: any) => [`${value} ${conversionData.to_currency}`, 'Rate']}
+									formatter={(value: unknown) => [`${value} ${conversionData.to_currency}`, 'Rate']}
 									contentStyle={{ backgroundColor: '#1F2937', border: '1px solid #374151', borderRadius: '8px' }}
 								/>
 								<Area

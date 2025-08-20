@@ -20,6 +20,7 @@ export default function QuizBox({ questions }: Props) {
 		}, 1000);
 
 		return () => clearInterval(interval);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [timer, submitted]);
 
 	const handleOptionClick = (option: string) => {

@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { Banknote, Camera, Loader2, RefreshCw } from "lucide-react";
+import React, { useMemo, useState } from "react";
+import { Camera, Loader2, RefreshCw } from "lucide-react";
 import ImageUpload from "./_components/ImageUpload";
 import RecognitionDetails from "./_components/RecognitionDetails";
 import ConversionTable from "./_components/ConversionTable";
-import ExchangeRateChart from "./_components/ExchangeRateChart";
 import InflationChart from "./_components/InflationChart";
 import { fetchExchangeRates, fetchHistoricalRates } from "@/lib/exchange";
 import { getGeminiCurrencyInfo } from "@/lib/gemini";
@@ -65,7 +65,7 @@ export default function Dashboard() {
 	const [gemini, setGemini] = useState<GeminiCurrency | null>(null);
 	const [notNote, setNotNote] = useState(false);
 	const [rates, setRates] = useState<Record<string, number>>({});
-	const [hist, setHist] = useState<Array<{ date: string; rate: number }>>([]);
+	const [_, setHist] = useState<Array<{ date: string; rate: number }>>([]);
 	const [inflation, setInflation] = useState<Array<{ year: number; value: number }>>([]);
 	const [loadingRates, setLoadingRates] = useState(false);
 
@@ -188,11 +188,6 @@ export default function Dashboard() {
 					/>
 
 					<div className="gap-6 grid grid-cols-1">
-						{/* <ExchangeRateChart
-							baseCode={baseCode}
-							series={hist}
-							loading={loadingRates}
-						/> */}
 						<InflationChart
 							country={gemini?.country ?? baseCode}
 							data={inflation}
