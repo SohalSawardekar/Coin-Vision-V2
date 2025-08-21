@@ -77,7 +77,7 @@ const NavBar = () => {
 								<p className='text-[#1d254d]'>V</p>
 							</span>
 						</div>
-						<div className='hidden sm:flex flex-col'>
+						<div className='flex flex-col'>
 							<div className='flex items-center gap-1'>
 								<h1 className='font-bold text-white text-xl tracking-tight'>Coin</h1>
 								<h1 className='font-bold text-[#636fac] text-xl tracking-tight'>Vision</h1>
@@ -87,7 +87,7 @@ const NavBar = () => {
 					</div>
 
 					{/* Navigation Links */}
-					<div className='hidden md:flex items-center space-x-1 bg-white/5 backdrop-blur-sm p-2 rounded-2xl'>
+					<div className='hidden lg:flex items-center space-x-1 bg-white/5 backdrop-blur-sm p-2 rounded-2xl'>
 						{navBtns.map((data, index) => {
 							const Icon = data.icon
 							const isActive =
@@ -132,7 +132,7 @@ const NavBar = () => {
 									</AvatarFallback>
 								</Avatar>
 								<div className="hidden sm:flex flex-col items-start">
-									<span className="font-medium text-white text-sm">{userData?.user_metadata?.display_name || 'User'}</span>
+									<span className="font-medium text-white text-sm">{userData?.user_metadata?.display_name || userData?.user_metadata?.name || 'User'}</span>
 									<span className="text-white/50 text-xs">{userData?.user_metadata?.email || ''}</span>
 								</div>
 								<ChevronDown size={16} className="text-white/50 group-hover:text-white transition-colors duration-200" />
@@ -209,8 +209,8 @@ const NavBar = () => {
 			</div>
 
 			{/* Mobile Navigation */}
-			<div className='md:hidden px-6 pb-4'>
-				<div className='flex justify-center space-x-1 bg-white/5 p-2 rounded-2xl'>
+			<div className='lg:hidden flex justify-center px-6 pb-4'>
+				<div className='space-x-1 grid grid-cols-4 bg-white/5 p-2 rounded-2xl w-[95%] sm:max-w-[75%]'>
 					{navBtns.map((data, index) => {
 						const Icon = data.icon
 						const isActive = data.path === pathname

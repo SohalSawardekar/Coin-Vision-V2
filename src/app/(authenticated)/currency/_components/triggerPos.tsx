@@ -6,13 +6,14 @@ export function MainContent({ children }: { children: React.ReactNode }) {
 	const { open } = useSidebar(); // <-- sidebar open/close state
 	return (
 		<div
-			className={`transition-all duration-300`}
+			className="transition-all duration-300"
 			style={{
-				transform: open ? "translateX(20dvw)" : "translateX(0)",
+				transform: open ? "translateX(var(--sidebar-width))" : "translateX(0)",
 			}}
 		>
 			{children}
 		</div>
+
 	);
 }
 
@@ -23,7 +24,7 @@ export function ContentWithBlur({ children }: { children: React.ReactNode }) {
 		<div
 			className={clsx(
 				"flex-1 transition-all duration-300",
-				open && "lg:blur-md lg:pointer-events-none" // blur + disable clicks
+				open && "md:blur-md md:pointer-events-none" // blur + disable clicks on md+
 			)}
 		>
 			{children}

@@ -136,17 +136,17 @@ const Currency = () => {
 
 	return (
 		<>
-			<div className="flex ml-[3rem] w-full">
+			<div className="flex ml-0 md:ml-[3rem] px-4 md:px-0 w-full">
 				<p className="font-semibold text-white text-2xl text-left">Recognise Currency</p>
 			</div>
-			<div className='flex flex-row justify-center items-start gap-y-4 w-full'>
-				<div className="flex w-[50%]">
-					<div className='flex flex-col justify-start items-center gap-y-4 w-full'>
+			<div className="justify-center items-start gap-8 grid grid-cols-1 md:grid-cols-2 px-2 md:px-4 w-full">
+				<div className="flex justify-center w-full">
+					<div className="flex flex-col justify-start items-center gap-y-4 w-full">
 						<ImageUpload setFile={setFile} />
 						<Button
 							onClick={handleRecognize}
 							disabled={loading || !file}
-							className="bg-secondary hover:bg-white/60 max-w-[200px] text-primary hover:cursor-pointer"
+							className="bg-secondary hover:bg-white/60 w-full sm:w-auto max-w-[200px] text-primary hover:cursor-pointer"
 						>
 							{loading ? (
 								<>
@@ -162,29 +162,59 @@ const Currency = () => {
 						</Button>
 					</div>
 				</div>
-				<div className="w-[50%]">
-					<div className="bg-[#27324b] p-4 rounded-3xl w-[90%] min-h-[60dvh]">
-						<div className="flex justify-center items-center mb-6">
-							<p className="mt-5 font-bold text-white text-2xl text-center">Prediction Result</p>
+				<div className="flex justify-center w-full">
+					<div className="bg-[#27324b] mx-auto p-4 rounded-3xl w-full max-w-2xl min-h-[60dvh]">
+						<div className="flex sm:flex-row flex-col justify-center items-center gap-2 mb-6">
+							<p className="mt-5 font-bold text-white text-xl md:text-2xl text-center">Prediction Result</p>
 						</div>
+						{loading ? (
+							<div className="flex flex-col gap-y-2">
+								{/* Skeleton - Main Prediction */}
+								<div className="bg-[#1a2332] p-4 rounded-xl animate-pulse">
+									<div className="flex items-center mb-2">
+										<div className="bg-gray-700 mr-2 rounded w-5 h-5"></div>
+										<div className="bg-gray-700 rounded w-40 h-5"></div>
+									</div>
+									<div className="bg-gray-700 mb-2 rounded w-32 h-6"></div>
+									<div className="bg-gray-700 rounded w-24 h-4"></div>
+								</div>
 
-						{data === null ? (
-							<div className="flex flex-col justify-center items-center h-full text-center">
-								<Banknote className="mb-4 text-gray-400" size={48} />
-								<p className="text-gray-400 text-center">Upload an image to get currency predictions</p>
+								{/* Skeleton - Basic Information */}
+								<div className="bg-[#1a2332] p-4 rounded-xl animate-pulse">
+									<div className="flex items-center mb-3">
+										<div className="bg-gray-700 mr-2 rounded w-5 h-5"></div>
+										<div className="bg-gray-700 rounded w-36 h-5"></div>
+									</div>
+
+									<div className="gap-2 grid grid-cols-1 text-sm">
+										{Array.from({ length: 6 }).map((_, i) => (
+											<div key={i} className="flex justify-between">
+												<div className="bg-gray-700 rounded w-20 h-4"></div>
+												<div className="bg-gray-700 rounded w-28 h-4"></div>
+											</div>
+										))}
+									</div>
+								</div>
 							</div>
-						) : notNote ? (
-							<div className="flex flex-col justify-center items-center h-full">
-								<AlertCircleIcon className="mb-4 text-red-400" size={48} />
-								<p className="font-medium text-red-400 text-center">This is not a currency note.</p>
-								<p className="mt-2 text-gray-400 text-sm text-center">Please upload an image of a banknote.</p>
-							</div>
-						) : (
-							<CurrencyDetails data={data} geminiLoading={geminiLoading} />
-						)}
+						) : (<>
+							{data === null ? (
+								<div className="flex flex-col justify-center items-center h-[70%] text-center">
+									<Banknote className="mb-4 text-gray-400" size={48} />
+									<p className="text-gray-400 text-center">Upload an image to get currency predictions</p>
+								</div>
+							) : notNote ? (
+								<div className="flex flex-col justify-center items-center h-full">
+									<AlertCircleIcon className="mb-4 text-red-400" size={48} />
+									<p className="font-medium text-red-400 text-center">This is not a currency note.</p>
+									<p className="mt-2 text-gray-400 text-sm text-center">Please upload an image of a banknote.</p>
+								</div>
+							) : (
+								<CurrencyDetails data={data} geminiLoading={geminiLoading} />
+							)}
+						</>)}
 					</div>
 				</div>
-			</div>
+			</div >
 		</>
 	)
 }

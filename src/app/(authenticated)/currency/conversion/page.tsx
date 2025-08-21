@@ -18,6 +18,7 @@ import {
 	Info
 } from 'lucide-react'
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts'
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface PredictionResult {
 	status: string;
@@ -290,18 +291,18 @@ const CurrencyConverter = () => {
 
 	return (
 		<>
-			<div className="flex mb-6 ml-[3rem] w-full">
-				<p className="font-semibold text-white text-2xl text-left">AI Currency Converter</p>
+			<div className="flex mb-4 xs:mb-6 ml-2 xs:ml-6 sm:ml-12 md:ml-16 w-full">
+				<p className="font-semibold text-white text-xl xs:text-2xl text-left">AI Currency Converter</p>
 			</div>
-			<div className='justify-center items-start gap-8 grid grid-cols-2 px-4 w-full'>
-				<div className='flex justify-center'>
-					<div className='flex flex-col justify-start items-center gap-y-4 w-full max-w-md'>
+			<div className='justify-center items-start gap-4 xs:gap-8 grid grid-cols-1 lg:grid-cols-2 px-2 xs:px-4 w-full'>
+				<div className='flex justify-center mb-6 lg:mb-0'>
+					<div className='flex flex-col justify-start items-center gap-y-4 w-full max-w-xs xs:max-w-sm sm:max-w-md'>
 						<ImageUpload setFile={setFile} />
 						<div className="flex flex-col gap-2 w-full max-w-[200px]">
 							<button
 								onClick={handleRecognize}
 								disabled={loading || !file}
-								className="flex justify-center items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 px-4 py-2 rounded-lg font-medium text-white transition-colors"
+								className="flex justify-center items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 px-4 py-2 rounded-lg font-medium text-white text-sm xs:text-base transition-colors"
 							>
 								{loading ? (
 									<>
@@ -319,7 +320,7 @@ const CurrencyConverter = () => {
 							{step !== 'upload' && (
 								<button
 									onClick={resetApp}
-									className="flex justify-center items-center gap-2 bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg font-medium text-white transition-colors"
+									className="flex justify-center items-center gap-2 bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg font-medium text-white text-sm xs:text-base transition-colors"
 								>
 									<RefreshCw size={16} />
 									Reset
@@ -330,59 +331,135 @@ const CurrencyConverter = () => {
 				</div>
 
 				<div className="flex justify-center">
-					<div className="bg-[#27324b] p-6 rounded-3xl w-full min-h-[60dvh]">
-						<div className="flex justify-center items-center mb-6">
-							<p className="font-bold text-white text-2xl text-center">Currency Analysis</p>
-							{(loading || loadingRates) && <Loader2 className="ml-3 text-blue-400 animate-spin" size={24} />}
+					<div className="bg-[#27324b] p-4 xs:p-6 rounded-2xl xs:rounded-3xl w-full max-w-full sm:max-w-xl md:max-w-2xl min-h-[50dvh] xs:min-h-[60dvh]">
+						<div className="flex justify-center items-center mb-4 xs:mb-6">
+							<p className="font-bold text-white text-xl xs:text-2xl text-center">Currency Analysis</p>
 						</div>
 
-						{step === 'upload' && !notNote && !predictionResult && (
-							<div className="flex flex-col justify-center items-center h-[70%] text-center">
-								<DollarSign className="mb-4 text-gray-400" size={48} />
-								<p className="text-gray-400 text-center">Upload a currency note to detect and convert</p>
-								<p className="mt-2 text-gray-500 text-sm">Our AI will identify the currency and provide real-time conversion rates</p>
+						{loading ? (
+							<div className="space-y-4 max-h-[70vh] overflow-y-auto">
+								{/* Conversion Result */}
+								<div className="bg-gradient-to-r from-green-900/30 to-blue-900/30 p-6 border-2 border-green-500/30 rounded-xl">
+									<div className="flex items-center mb-4">
+										<Skeleton className="mr-2 rounded-full w-6 h-6" />
+										<Skeleton className="w-40 h-6" />
+									</div>
+
+									<div className="flex justify-between items-center mb-4">
+										<div className="space-y-2 text-center">
+											<Skeleton className="mx-auto w-24 h-4" />
+											<Skeleton className="mx-auto w-20 h-6" />
+										</div>
+
+										<Skeleton className="rounded-full w-8 h-8" />
+
+										<div className="space-y-2 text-center">
+											<Skeleton className="mx-auto w-24 h-4" />
+											<Skeleton className="mx-auto w-20 h-6" />
+										</div>
+									</div>
+
+									<div className="space-y-2 bg-[#1a2332] p-3 rounded-lg text-center">
+										<Skeleton className="mx-auto w-28 h-4" />
+										<Skeleton className="mx-auto w-44 h-5" />
+									</div>
+								</div>
+
+								{/* Historical Rate Chart */}
+								<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+									<div className="flex items-center mb-4">
+										<Skeleton className="mr-2 rounded-full w-5 h-5" />
+										<Skeleton className="w-48 h-5" />
+									</div>
+									<Skeleton className="rounded-md w-full h-48" />
+									<Skeleton className="mx-auto mt-3 w-64 h-3" />
+								</div>
+
+								{/* Detection Details */}
+								<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+									<div className="flex items-center mb-3">
+										<Skeleton className="mr-2 rounded-full w-5 h-5" />
+										<Skeleton className="w-36 h-5" />
+									</div>
+									<div className="gap-4 grid grid-cols-2">
+										{Array.from({ length: 4 }).map((_, i) => (
+											<div key={i} className="space-y-2">
+												<Skeleton className="w-24 h-3" />
+												<Skeleton className="w-32 h-4" />
+											</div>
+										))}
+									</div>
+								</div>
+
+								{/* Exchange Rate Info */}
+								<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+									<div className="flex items-center mb-3">
+										<Skeleton className="mr-2 rounded-full w-5 h-5" />
+										<Skeleton className="w-48 h-5" />
+									</div>
+									<div className="space-y-2">
+										<Skeleton className="w-60 h-4" />
+										<Skeleton className="w-52 h-4" />
+										<Skeleton className="rounded-md w-full h-12" />
+									</div>
+								</div>
+
+								{/* Actions */}
+								<div className="flex gap-3">
+									<Skeleton className="rounded-lg w-full h-10" />
+								</div>
 							</div>
-						)}
+						) : (
+							<>
+								{step === 'upload' && !notNote && !predictionResult && (
+									<div className="flex flex-col justify-center items-center h-[40vh] xs:h-[70%] text-center">
+										<DollarSign className="mb-4 text-gray-400" size={48} />
+										<p className="text-gray-400 text-sm xs:text-base text-center">Upload a currency note to detect and convert</p>
+										<p className="mt-2 text-gray-500 text-xs xs:text-sm">Our AI will identify the currency and provide real-time conversion rates</p>
+									</div>
+								)}
 
-						{notNote && (
-							<div className="flex flex-col justify-center items-center h-[70%] text-center">
-								<AlertCircle className="mb-4 text-red-400" size={48} />
-								<p className="text-red-400">This is not a currency note.</p>
-								<p className="mt-2 text-gray-500 text-sm">Please upload a valid currency note image</p>
-							</div>
-						)}
+								{notNote && (
+									<div className="flex flex-col justify-center items-center h-[40vh] xs:h-[70%] text-center">
+										<AlertCircle className="mb-4 text-red-400" size={48} />
+										<p className="text-red-400 text-sm xs:text-base">This is not a currency note.</p>
+										<p className="mt-2 text-gray-500 text-xs xs:text-sm">Please upload a valid currency note image</p>
+									</div>
+								)}
 
-						{step === 'detected' && predictionResult && currencyData && (
-							<CurrencyDetectionResults
-								predictionResult={predictionResult}
-								currencyData={currencyData}
-								targetCurrency={targetCurrency}
-								setTargetCurrency={setTargetCurrency}
-								customAmount={customAmount}
-								setCustomAmount={setCustomAmount}
-								onConvert={handleConvert}
-								currencies={currencies}
-								exchangeRates={exchangeRates}
-								loadingRates={loadingRates}
-							/>
-						)}
+								{step === 'detected' && predictionResult && currencyData && (
+									<CurrencyDetectionResults
+										predictionResult={predictionResult}
+										currencyData={currencyData}
+										targetCurrency={targetCurrency}
+										setTargetCurrency={setTargetCurrency}
+										customAmount={customAmount}
+										setCustomAmount={setCustomAmount}
+										onConvert={handleConvert}
+										currencies={currencies}
+										exchangeRates={exchangeRates}
+										loadingRates={loadingRates}
+									/>
+								)}
 
-						{step === 'converted' && conversionData && currencyData && (
-							<ConversionResults
-								predictionResult={predictionResult!}
-								currencyData={currencyData}
-								conversionData={conversionData}
-								currencies={currencies}
-								historicalData={historicalData}
-								onConvertAgain={() => setStep('detected')}
-							/>
-						)}
+								{step === 'converted' && conversionData && currencyData && (
+									<ConversionResults
+										predictionResult={predictionResult!}
+										currencyData={currencyData}
+										conversionData={conversionData}
+										currencies={currencies}
+										historicalData={historicalData}
+										onConvertAgain={() => setStep('detected')}
+									/>
+								)}
 
-						{predictionResult?.status === 'error' && (
-							<div className="bg-[#1a2332] p-3 rounded-xl">
-								<h3 className="mb-3 font-semibold text-red-400 text-lg">Error</h3>
-								<p className="text-gray-300 leading-relaxed">{predictionResult.prediction}</p>
-							</div>
+								{predictionResult?.status === 'error' && (
+									<div className="bg-[#1a2332] p-3 rounded-xl">
+										<h3 className="mb-3 font-semibold text-red-400 text-lg">Error</h3>
+										<p className="text-gray-300 leading-relaxed">{predictionResult.prediction}</p>
+									</div>
+								)}
+							</>
 						)}
 					</div>
 				</div>

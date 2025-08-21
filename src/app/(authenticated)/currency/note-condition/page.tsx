@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useFileUpload } from '@/hooks/use-file-upload'
 import {
 	AlertCircleIcon,
@@ -104,17 +105,17 @@ const NoteConditionPage = () => {
 
 	return (
 		<>
-			<div className="flex mb-6 ml-[3rem] w-full">
+			<div className="flex mb-6 ml-0 md:ml-[3rem] px-4 md:px-0 w-full">
 				<p className="font-semibold text-white text-2xl text-left">Note Condition Assessment</p>
 			</div>
-			<div className='justify-center items-start gap-8 grid grid-cols-2 px-4 w-full'>
-				<div className='flex justify-center'>
-					<div className='flex flex-col justify-start items-center gap-y-4 w-full max-w-md'>
+			<div className="justify-center items-start gap-8 grid grid-cols-1 md:grid-cols-2 px-2 md:px-4 w-full">
+				<div className="flex justify-center w-full">
+					<div className="flex flex-col justify-start items-center gap-y-4 w-full max-w-md">
 						<ImageUpload setFile={setFile} />
 						<Button
 							onClick={handleRecognize}
 							disabled={loading || !file}
-							className="bg-secondary hover:bg-white/60 max-w-[200px] text-primary transition-all duration-200 hover:cursor-pointer"
+							className="bg-secondary hover:bg-white/60 w-full sm:w-auto max-w-[200px] text-primary transition-all duration-200 hover:cursor-pointer"
 						>
 							{loading ? (
 								<>
@@ -130,31 +131,87 @@ const NoteConditionPage = () => {
 						</Button>
 					</div>
 				</div>
-				<div className="flex justify-center">
-					<div className="bg-[#27324b] p-6 rounded-3xl w-full min-h-[60dvh]">
-						<div className="flex justify-center items-center mb-6">
-							<p className="font-bold text-white text-2xl text-center">Assessment Results</p>
-							{loading && <Loader2 className="ml-3 text-blue-400 animate-spin" size={24} />}
+				<div className="flex justify-center w-full">
+					<div className="bg-[#27324b] mx-auto p-4 md:p-6 rounded-3xl w-full max-w-2xl min-h-[60dvh]">
+						<div className="flex sm:flex-row flex-col justify-center items-center gap-2 mb-6">
+							<p className="font-bold text-white text-xl md:text-2xl text-center">Assessment Results</p>
 						</div>
-						{notNote && (
-							<div className="flex flex-col justify-center items-center h-[70%] text-center">
-								<Banknote className="mb-4 text-gray-400" size={48} />
-								<p className="text-gray-400">This is not a currency note.</p>
+
+						{loading ? (
+							<div className="space-y-4 text-white">
+								{/* Overall Condition */}
+								<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+									<div className="flex justify-between items-center mb-3">
+										<h3 className="flex items-center font-semibold text-lg">
+											<Skeleton className="mr-2 rounded-full w-5 h-5" />
+											<Skeleton className="rounded w-32 h-5" />
+										</h3>
+										<Skeleton className="rounded-full w-20 h-6" />
+									</div>
+									<Skeleton className="rounded w-28 h-6" />
+								</div>
+
+								{/* Physical Damage Assessment */}
+								<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+									<div className="flex items-center mb-3 font-semibold text-lg">
+										<Skeleton className="mr-2 rounded-full w-5 h-5" />
+										<Skeleton className="rounded w-48 h-5" />
+									</div>
+									<div className="gap-3 grid grid-cols-1 text-sm">
+										{[...Array(3)].map((_, i) => (
+											<div key={i} className="flex flex-col">
+												<Skeleton className="mb-1 rounded w-32 h-4" />
+												<Skeleton className="rounded w-24 h-4" />
+											</div>
+										))}
+									</div>
+								</div>
+
+								{/* Structural Integrity */}
+								<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+									<div className="flex items-center mb-3 font-semibold text-lg">
+										<Skeleton className="mr-2 rounded-full w-5 h-5" />
+										<Skeleton className="rounded w-40 h-5" />
+									</div>
+									<Skeleton className="rounded w-full h-12" />
+								</div>
+
+								{/* Value Assessment */}
+								<div className="gap-4 grid grid-cols-1 md:grid-cols-2">
+									{[...Array(2)].map((_, i) => (
+										<div key={i} className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+											<div className="flex items-center mb-3 font-semibold text-lg">
+												<Skeleton className="mr-2 rounded-full w-5 h-5" />
+												<Skeleton className="rounded w-36 h-5" />
+											</div>
+											<Skeleton className="rounded w-full h-10" />
+										</div>
+									))}
+								</div>
 							</div>
-						)}
-						{!notNote && !data && !rawResponse ? (
-							<div className="flex flex-col justify-center items-center h-[70%] text-center">
-								<Banknote className="mb-4 text-gray-400" size={48} />
-								<p className="text-gray-400 text-center">Upload a currency note image to assess its condition</p>
-								<p className="mt-2 text-gray-500 text-sm">Our AI will analyze physical damage, value, and marketability</p>
-							</div>
-						) : data ? (
-							<ConditionDetails data={data} />
 						) : (
-							<div className="bg-[#1a2332] p-3 rounded-xl">
-								<h3 className="mb-3 font-semibold text-white text-lg">Basic Assessment</h3>
-								<p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{rawResponse}</p>
-							</div>
+							<>
+								{notNote && (
+									<div className="flex flex-col justify-center items-center h-[70%] text-center">
+										<Banknote className="mb-4 text-gray-400" size={48} />
+										<p className="text-gray-400">This is not a currency note.</p>
+									</div>
+								)}
+								{!notNote && !data && !rawResponse ? (
+									<div className="flex flex-col justify-center items-center h-[70%] text-center">
+										<Banknote className="mb-4 text-gray-400" size={48} />
+										<p className="text-gray-400 text-center">Upload a currency note image to assess its condition</p>
+										<p className="mt-2 text-gray-500 text-sm">Our AI will analyze physical damage, value, and marketability</p>
+									</div>
+								) : data ? (
+									<ConditionDetails data={data} />
+								) : (
+									<div className="bg-[#1a2332] p-3 rounded-xl">
+										<h3 className="mb-3 font-semibold text-white text-lg">Basic Assessment</h3>
+										<p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{rawResponse}</p>
+									</div>
+								)}
+							</>
 						)}
 					</div>
 				</div>
@@ -234,8 +291,8 @@ const ConditionDetails = ({ data }: { data: ConditionData }) => {
 								const isMajor = severity.includes('major') || severity.includes('severe') || severity.includes('extensive');
 
 								return (
-									<div key={key} className="flex justify-between items-center">
-										<span className="text-gray-300 capitalize">{key.replace('_', ' ')}:</span>
+									<div key={key} className="flex flex-col justify-between">
+										<span className="font-semibold text-gray-300 capitalize">{key.replace('_', ' ')}:</span>
 										<span className={`font-medium ${isMinor ? 'text-yellow-400' :
 											isMajor ? 'text-red-400' :
 												'text-gray-300'

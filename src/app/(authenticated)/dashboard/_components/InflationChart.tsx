@@ -34,7 +34,6 @@ export default function InflationChart({
 		<div className="bg-white/5 p-4 border border-white/10 rounded-2xl">
 			<div className="flex justify-between items-center mb-2">
 				<h3 className="font-semibold">Inflation Trend (YoY)</h3>
-				{loading && <span className="opacity-70 text-xs">Loading...</span>}
 			</div>
 
 			<div className="h-64">

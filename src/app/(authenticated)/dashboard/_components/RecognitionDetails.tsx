@@ -25,19 +25,44 @@ export default function RecognitionDetails({
 
 	if (!prediction) {
 		return (
-			<div className="bg-white/5 opacity-70 p-4 border border-white/10 rounded-2xl text-sm">
-				Waiting for recognition...
+			<div className="flex flex-col items-start gap-y-2 bg-white/5 p-4 border border-white/10 rounded-2xl text-blue-400 text-sm">
+				<div className="flex flex-row justify-between items-center w-full text-white">
+					<div className="flex items-center gap-2 font-semibold">
+						<Banknote /> Currency Identified
+					</div>
+					<span className="opacity-70 text-xs">Confidence: 0.0%</span>
+				</div>
+				<div className="flex justify-center items-center gap-3 bg-blue-500/10 p-4 border border-blue-500/20 rounded-2xl w-full h-full text-blue-400 text-sm">
+					{/* Hourglass Icon */}
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="w-5 h-5 text-blue-400"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						strokeWidth={2}
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M8 7h8M8 17h8M6 4h12v2a6 6 0 01-6 6 6 6 0 01-6-6V4zM6 20h12v-2a6 6 0 00-6-6 6 6 0 00-6 6v2z"
+						/>
+					</svg>
+
+					{/* Message */}
+					<span className="font-medium">Waiting for recognition...</span>
+				</div>
 			</div>
 		);
 	}
 
-	// if (prediction.status === "error") {
-	// 	return (
-	// 		<div className="bg-amber-50 p-4 border border-amber-200 rounded-2xl text-amber-800 text-sm">
-	// 			{prediction.prediction}
-	// 		</div>
-	// 	);
-	// }
+	if (prediction.status === "error") {
+		return (
+			<div className="bg-amber-50 p-4 border border-amber-200 rounded-2xl text-amber-800 text-sm">
+				{prediction.prediction}
+			</div>
+		);
+	}
 
 	return (
 		<div className="space-y-3 bg-white/5 p-4 border border-white/10 rounded-2xl">

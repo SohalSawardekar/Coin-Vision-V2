@@ -11,11 +11,9 @@ import { ContentWithBlur, MainContent } from "./_components/triggerPos"
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<SidebarProvider
-			style={
-				{
-					"--sidebar-width": "20dvw",
-				} as React.CSSProperties
-			}
+			style={{
+				"--sidebar-width": "clamp(220px, 80vw, 320px)",
+			} as React.CSSProperties}
 		>
 			<AppSidebar />
 			<SidebarInset className="absolute flex flex-col bg-inherit h-full overflow-x-clip text-white">

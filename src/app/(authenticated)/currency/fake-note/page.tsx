@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useFileUpload } from '@/hooks/use-file-upload'
 import {
 	AlertCircleIcon,
@@ -97,17 +98,17 @@ const FakeNoteDetection = () => {
 
 	return (
 		<>
-			<div className="flex mb-6 ml-[3rem] w-full">
+			<div className="flex mb-6 ml-0 md:ml-[3rem] px-4 md:px-0 w-full">
 				<p className="font-semibold text-white text-2xl text-left">Fake Note Detection</p>
 			</div>
-			<div className='justify-center items-start gap-8 grid grid-cols-2 px-4 w-full'>
-				<div className='flex justify-center'>
-					<div className='flex flex-col justify-start items-center gap-y-4 w-full max-w-md'>
+			<div className="justify-center items-start gap-8 grid grid-cols-1 md:grid-cols-2 px-2 md:px-4 w-full">
+				<div className="flex justify-center w-full">
+					<div className="flex flex-col justify-start items-center gap-y-4 w-full max-w-md">
 						<ImageUpload setFile={setFile} />
 						<Button
 							onClick={handleAnalyze}
 							disabled={loading || !file}
-							className="bg-secondary hover:bg-white/60 max-w-[200px] text-primary transition-all duration-200 hover:cursor-pointer"
+							className="bg-secondary hover:bg-white/60 w-full sm:w-auto max-w-[200px] text-primary transition-all duration-200 hover:cursor-pointer"
 						>
 							{loading ? (
 								<>
@@ -123,31 +124,62 @@ const FakeNoteDetection = () => {
 						</Button>
 					</div>
 				</div>
-				<div className="flex justify-center">
-					<div className="bg-[#27324b] p-6 rounded-3xl w-full min-h-[60dvh]">
-						<div className="flex justify-center items-center mb-6">
-							<p className="font-bold text-white text-2xl text-center">Authenticity Analysis</p>
-							{loading && <Loader2 className="ml-3 text-blue-400 animate-spin" size={24} />}
+				<div className="flex justify-center w-full">
+					<div className="bg-[#27324b] mx-auto p-4 md:p-6 rounded-3xl w-full max-w-2xl min-h-[60dvh]">
+						<div className="flex sm:flex-row flex-col justify-center items-center gap-2 mb-6">
+							<p className="font-bold text-white text-xl md:text-2xl text-center">Authenticity Analysis</p>
 						</div>
-						{notNote && (
-							<div className="flex flex-col justify-center items-center h-[70%] text-center">
-								<Banknote className="mb-4 text-gray-400" size={48} />
-								<p className="text-gray-400">This is not a currency note.</p>
+
+						{loading ? (
+							<div className="space-y-4">
+								{/* Authenticity Status */}
+								<div className="bg-[#1a2332] p-4 border-2 border-gray-700 rounded-xl">
+									<div className="flex justify-between items-center mb-3">
+										<div className="flex items-center">
+											<Skeleton className="mr-2 rounded-full w-5 h-5" />
+											<Skeleton className="w-40 h-5" />
+										</div>
+										<Skeleton className="rounded-full w-28 h-6" />
+									</div>
+									<Skeleton className="w-32 h-6" />
+								</div>
+
+								{/* Overall Assessment */}
+								<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+									<div className="flex items-center mb-3">
+										<Skeleton className="mr-2 rounded-full w-5 h-5" />
+										<Skeleton className="w-44 h-5" />
+									</div>
+									<div className="space-y-2">
+										<Skeleton className="w-full h-4" />
+										<Skeleton className="w-[90%] h-4" />
+										<Skeleton className="w-[80%] h-4" />
+									</div>
+								</div>
 							</div>
-						)}
-						{!notNote && !data && !rawResponse ? (
-							<div className="flex flex-col justify-center items-center h-[70%] text-center">
-								<Shield className="mb-4 text-gray-400" size={48} />
-								<p className="text-gray-400 text-center">Upload a currency note to verify its authenticity</p>
-								<p className="mt-2 text-gray-500 text-sm">Our AI will analyze security features and detect counterfeits</p>
-							</div>
-						) : data ? (
-							<AuthenticityDetails data={data} />
 						) : (
-							<div className="bg-[#1a2332] p-3 rounded-xl">
-								<h3 className="mb-3 font-semibold text-white text-lg">Basic Analysis</h3>
-								<p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{rawResponse}</p>
-							</div>
+							<>
+								{notNote && (
+									<div className="flex flex-col justify-center items-center h-[70%] text-center">
+										<Banknote className="mb-4 text-gray-400" size={48} />
+										<p className="text-gray-400">This is not a currency note.</p>
+									</div>
+								)}
+								{!notNote && !data && !rawResponse ? (
+									<div className="flex flex-col justify-center items-center h-[70%] text-center">
+										<Shield className="mb-4 text-gray-400" size={48} />
+										<p className="text-gray-400 text-center">Upload a currency note to verify its authenticity</p>
+										<p className="mt-2 text-gray-500 text-sm">Our AI will analyze security features and detect counterfeits</p>
+									</div>
+								) : data ? (
+									<AuthenticityDetails data={data} />
+								) : (
+									<div className="bg-[#1a2332] p-3 rounded-xl">
+										<h3 className="mb-3 font-semibold text-white text-lg">Basic Analysis</h3>
+										<p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{rawResponse}</p>
+									</div>
+								)}
+							</>
 						)}
 					</div>
 				</div>
@@ -157,6 +189,7 @@ const FakeNoteDetection = () => {
 }
 
 const AuthenticityDetails = ({ data }: { data: AuthenticityData }) => {
+	const [more, setMore] = useState(false)
 	const getAuthenticityColor = (status: string) => {
 		const lowerStatus = status.toLowerCase();
 		if (lowerStatus.includes('authentic') || lowerStatus.includes('genuine') || lowerStatus.includes('real')) {
@@ -207,7 +240,7 @@ const AuthenticityDetails = ({ data }: { data: AuthenticityData }) => {
 				<div className="flex justify-between items-center mb-3">
 					<h3 className="flex items-center font-semibold text-lg">
 						{getAuthenticityIcon(data.authenticity_status)}
-						<span className="ml-2">Authenticity Status</span>
+						<span className="ml-2 text-md md:text-lg">Authenticity Status</span>
 					</h3>
 					{data.confidence_score && (
 						<div className={`px-3 py-1 rounded-full text-sm font-bold ${getConfidenceColor(data.confidence_score)}`}>
@@ -220,107 +253,6 @@ const AuthenticityDetails = ({ data }: { data: AuthenticityData }) => {
 				</p>
 			</div>
 
-			{/* Security Features Analysis */}
-			{data.security_features && (
-				<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
-					<h3 className="flex items-center mb-3 font-semibold text-lg">
-						<Lock className="mr-2 text-blue-400" size={20} />
-						Security Features Analysis
-					</h3>
-					<div className="gap-3 grid grid-cols-1 text-sm">
-						{Object.entries(data.security_features).map(([key, value]) => {
-							if (value && value !== "Not analyzed" && value !== "Not available") {
-								const { color, icon } = getFeatureStatus(value);
-								return (
-									<div key={key} className="flex justify-between items-center bg-[#0f1419] p-2 rounded-lg">
-										<div className="flex items-center">
-											{icon}
-											<span className="ml-2 text-gray-300 capitalize">
-												{key.replace('_', ' ')}:
-											</span>
-										</div>
-										<span className={`font-medium ${color} text-right max-w-[60%]`}>
-											{value}
-										</span>
-									</div>
-								);
-							}
-							return null;
-						})}
-					</div>
-				</div>
-			)}
-
-			{/* Quality Assessment */}
-			<div className="gap-4 grid grid-cols-1 md:grid-cols-2">
-				{data.paper_quality && data.paper_quality !== "Not available" && (
-					<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
-						<h3 className="flex items-center mb-3 font-semibold text-lg">
-							<Fingerprint className="mr-2 text-purple-400" size={20} />
-							Paper Quality
-						</h3>
-						<p className="text-gray-300 text-sm leading-relaxed">{data.paper_quality}</p>
-					</div>
-				)}
-
-				{data.printing_quality && data.printing_quality !== "Not available" && (
-					<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
-						<h3 className="flex items-center mb-3 font-semibold text-lg">
-							<Zap className="mr-2 text-orange-400" size={20} />
-							Printing Quality
-						</h3>
-						<p className="text-gray-300 text-sm leading-relaxed">{data.printing_quality}</p>
-					</div>
-				)}
-			</div>
-
-			{/* Serial Number Analysis */}
-			{data.serial_number_analysis && data.serial_number_analysis !== "Not available" && (
-				<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
-					<h3 className="flex items-center mb-3 font-semibold text-lg">
-						<Search className="mr-2 text-cyan-400" size={20} />
-						Serial Number Analysis
-					</h3>
-					<p className="text-gray-300 text-sm leading-relaxed">{data.serial_number_analysis}</p>
-				</div>
-			)}
-
-			{/* Red Flags */}
-			{data.red_flags && data.red_flags.length > 0 && (
-				<div className="bg-red-950/30 p-4 border border-red-500/30 rounded-xl">
-					<h3 className="flex items-center mb-3 font-semibold text-lg">
-						<AlertTriangle className="mr-2 text-red-400" size={20} />
-						Security Concerns
-					</h3>
-					<ul className="space-y-2 text-sm">
-						{data.red_flags.map((flag, index) => (
-							<li key={index} className="flex items-start">
-								<XCircle className="flex-shrink-0 mt-0.5 mr-2 text-red-400" size={14} />
-								<span className="text-red-300">{flag}</span>
-							</li>
-						))}
-					</ul>
-				</div>
-			)}
-
-			{/* Authentication Tips */}
-			{data.authentication_tips && data.authentication_tips.length > 0 && (
-				<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
-					<h3 className="flex items-center mb-3 font-semibold text-lg">
-						<Award className="mr-2 text-green-400" size={20} />
-						Authentication Tips
-					</h3>
-					<ul className="space-y-2 text-sm">
-						{data.authentication_tips.map((tip, index) => (
-							<li key={index} className="flex items-start">
-								<CheckCircle className="flex-shrink-0 mt-0.5 mr-2 text-green-400" size={14} />
-								<span className="text-gray-300">{tip}</span>
-							</li>
-						))}
-					</ul>
-				</div>
-			)}
-
 			{/* Overall Assessment */}
 			{data.overall_assessment && data.overall_assessment !== "Not available" && (
 				<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
@@ -332,16 +264,122 @@ const AuthenticityDetails = ({ data }: { data: AuthenticityData }) => {
 				</div>
 			)}
 
-			{/* Detailed Analysis */}
-			{data.detailed_analysis && data.detailed_analysis !== "Not available" && (
-				<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
-					<h3 className="flex items-center mb-3 font-semibold text-lg">
-						<Search className="mr-2 text-teal-400" size={20} />
-						Detailed Technical Analysis
-					</h3>
-					<p className="text-gray-300 text-sm leading-relaxed">{data.detailed_analysis}</p>
-				</div>
+			{more && (
+				<>
+					{/* Security Features Analysis */}
+					{data.security_features && (
+						<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+							<h3 className="flex items-center mb-3 font-semibold text-lg">
+								<Lock className="mr-2 text-blue-400" size={20} />
+								Security Features Analysis
+							</h3>
+							<div className="gap-3 grid grid-cols-1 text-sm">
+								{Object.entries(data.security_features).map(([key, value]) => {
+									if (value && value !== "Not analyzed" && value !== "Not available") {
+										const { color, icon } = getFeatureStatus(value);
+										return (
+											<div key={key} className="flex justify-between items-center bg-[#0f1419] p-2 rounded-lg">
+												<div className="flex items-center">
+													{icon}
+													<span className="ml-2 text-gray-300 capitalize">
+														{key.replace('_', ' ')}:
+													</span>
+												</div>
+												<span className={`font-medium ${color} text-right max-w-[60%]`}>
+													{value}
+												</span>
+											</div>
+										);
+									}
+									return null;
+								})}
+							</div>
+						</div>
+					)}
+
+					{/* Quality Assessment */}
+					<div className="gap-4 grid grid-cols-1 md:grid-cols-2">
+						{data.paper_quality && data.paper_quality !== "Not available" && (
+							<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+								<h3 className="flex items-center mb-3 font-semibold text-lg">
+									<Fingerprint className="mr-2 text-purple-400" size={20} />
+									Paper Quality
+								</h3>
+								<p className="text-gray-300 text-sm leading-relaxed">{data.paper_quality}</p>
+							</div>
+						)}
+
+						{data.printing_quality && data.printing_quality !== "Not available" && (
+							<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+								<h3 className="flex items-center mb-3 font-semibold text-lg">
+									<Zap className="mr-2 text-orange-400" size={20} />
+									Printing Quality
+								</h3>
+								<p className="text-gray-300 text-sm leading-relaxed">{data.printing_quality}</p>
+							</div>
+						)}
+					</div>
+
+					{/* Serial Number Analysis */}
+					{data.serial_number_analysis && data.serial_number_analysis !== "Not available" && (
+						<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+							<h3 className="flex items-center mb-3 font-semibold text-lg">
+								<Search className="mr-2 text-cyan-400" size={20} />
+								Serial Number Analysis
+							</h3>
+							<p className="text-gray-300 text-sm leading-relaxed">{data.serial_number_analysis}</p>
+						</div>
+					)}
+
+					{/* Red Flags */}
+					{data.red_flags && data.red_flags.length > 0 && (
+						<div className="bg-red-950/30 p-4 border border-red-500/30 rounded-xl">
+							<h3 className="flex items-center mb-3 font-semibold text-lg">
+								<AlertTriangle className="mr-2 text-red-400" size={20} />
+								Security Concerns
+							</h3>
+							<ul className="space-y-2 text-sm">
+								{data.red_flags.map((flag, index) => (
+									<li key={index} className="flex items-start">
+										<XCircle className="flex-shrink-0 mt-0.5 mr-2 text-red-400" size={14} />
+										<span className="text-red-300">{flag}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					)}
+
+					{/* Authentication Tips */}
+					{data.authentication_tips && data.authentication_tips.length > 0 && (
+						<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+							<h3 className="flex items-center mb-3 font-semibold text-lg">
+								<Award className="mr-2 text-green-400" size={20} />
+								Authentication Tips
+							</h3>
+							<ul className="space-y-2 text-sm">
+								{data.authentication_tips.map((tip, index) => (
+									<li key={index} className="flex items-start">
+										<CheckCircle className="flex-shrink-0 mt-0.5 mr-2 text-green-400" size={14} />
+										<span className="text-gray-300">{tip}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					)}
+
+					{/* Detailed Analysis */}
+					{data.detailed_analysis && data.detailed_analysis !== "Not available" && (
+						<div className="bg-[#1a2332] p-4 border border-gray-700 rounded-xl">
+							<h3 className="flex items-center mb-3 font-semibold text-lg">
+								<Search className="mr-2 text-teal-400" size={20} />
+								Detailed Technical Analysis
+							</h3>
+							<p className="text-gray-300 text-sm leading-relaxed">{data.detailed_analysis}</p>
+						</div>
+					)}
+				</>
 			)}
+			<Button onClick={() => setMore(!more)}>{more ? "Show Less" : "Show More"}</Button>
 		</div>
 	);
 };

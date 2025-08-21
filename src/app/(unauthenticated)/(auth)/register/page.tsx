@@ -88,59 +88,59 @@ const RegisterPage = () => {
 	}
 
 	return (
-		<div className="w-[60%]">
+		<div className="flex justify-center items-center mx-auto px-2 xs:px-4 py-4 w-full max-w-[95vw] xs:max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
 			<form
-				className={cn("flex flex-col gap-6 bg-gradient-to-b from-[#343e72] to-[#232844] shadow-slate-100 shadow-xs p-[3rem] rounded-3xl text-white")}
+				className={cn("flex flex-col gap-5 xs:gap-6 bg-gradient-to-b from-[#343e72] to-[#232844] shadow-slate-100 shadow-xs p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl w-[80%] md:w-[90%] lg:w-[70%] text-white")}
 				onSubmit={handleRegister}
 			>
 				<div className="flex flex-col items-center gap-2 text-center">
-					<h1 className="font-bold text-2xl">Register</h1>
+					<h1 className="font-bold text-xl xs:text-2xl sm:text-3xl">Register</h1>
 				</div>
 
 				{error && (
-					<div className="bg-red-500/10 p-3 border border-red-500/50 rounded-lg text-red-200 text-sm">
+					<div className="bg-red-500/10 p-2 xs:p-3 border border-red-500/50 rounded-lg text-red-200 text-xs xs:text-sm">
 						{error}
 					</div>
 				)}
 
-				<div className="gap-6 grid">
-					<div className="gap-3 grid">
-						<Label htmlFor="name">Name</Label>
+				<div className="gap-5 xs:gap-6 grid">
+					<div className="gap-2 xs:gap-3 grid">
+						<Label htmlFor="name" className="text-xs xs:text-sm">Name</Label>
 						<Input
 							id="name"
 							name="name"
 							type="text"
 							placeholder="Enter your name"
-							className="bg-white text-black"
+							className="bg-white px-2 py-2 xs:py-2.5 text-black text-xs xs:text-sm"
 							value={formData.name}
 							onChange={handleInputChange}
 							required
 						/>
 					</div>
 
-					<div className="gap-3 grid">
-						<Label htmlFor="email">Email</Label>
+					<div className="gap-2 xs:gap-3 grid">
+						<Label htmlFor="email" className="text-xs xs:text-sm">Email</Label>
 						<Input
 							id="email"
 							name="email"
 							type="email"
 							placeholder="Enter your email"
-							className="bg-white text-black"
+							className="bg-white px-2 py-2 xs:py-2.5 text-black text-xs xs:text-sm"
 							value={formData.email}
 							onChange={handleInputChange}
 							required
 						/>
 					</div>
 
-					<div className="gap-3 grid">
-						<Label htmlFor="password">Enter Password</Label>
+					<div className="gap-2 xs:gap-3 grid">
+						<Label htmlFor="password" className="text-xs xs:text-sm">Enter Password</Label>
 						<div className="relative">
 							<Input
 								id="password"
 								name="password"
 								type={showPassword ? "text" : "password"}
 								placeholder="Enter your password"
-								className="bg-white pr-10 text-black"
+								className="bg-white px-2 py-2 xs:py-2.5 pr-10 text-black text-xs xs:text-sm"
 								value={formData.password}
 								onChange={handleInputChange}
 								required
@@ -148,22 +148,22 @@ const RegisterPage = () => {
 							<button
 								type="button"
 								onClick={() => setShowPassword(!showPassword)}
-								className="top-1/2 right-3 absolute text-gray-500 hover:text-gray-700 transition-colors -translate-y-1/2 transform"
+								className="top-1/2 right-2 xs:right-3 absolute text-gray-500 hover:text-gray-700 transition-colors -translate-y-1/2 transform"
 							>
-								{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+								{showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
 							</button>
 						</div>
 					</div>
 
-					<div className="gap-3 grid">
-						<Label htmlFor="confirm-password">Confirm Password</Label>
+					<div className="gap-2 xs:gap-3 grid">
+						<Label htmlFor="confirm-password" className="text-xs xs:text-sm">Confirm Password</Label>
 						<div className="relative">
 							<Input
 								id="confirm-password"
 								name="confirmPassword"
 								type={showConfirmPassword ? "text" : "password"}
 								placeholder="Confirm your password"
-								className="bg-white pr-10 text-black"
+								className="bg-white px-2 py-2 xs:py-2.5 pr-10 text-black text-xs xs:text-sm"
 								value={formData.confirmPassword}
 								onChange={handleInputChange}
 								required
@@ -171,23 +171,23 @@ const RegisterPage = () => {
 							<button
 								type="button"
 								onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-								className="top-1/2 right-3 absolute text-gray-500 hover:text-gray-700 transition-colors -translate-y-1/2 transform"
+								className="top-1/2 right-2 xs:right-3 absolute text-gray-500 hover:text-gray-700 transition-colors -translate-y-1/2 transform"
 							>
-								{showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+								{showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
 							</button>
 						</div>
 					</div>
 
 					<Button
 						type="submit"
-						className="bg-[#121521] hover:bg-[#1f2937] w-full font-semibold"
+						className="bg-[#121521] hover:bg-[#1f2937] py-2 xs:py-2.5 w-full font-semibold text-xs xs:text-sm"
 						disabled={loading}
 					>
 						{loading ? "Creating Account..." : "Register"}
 					</Button>
 				</div>
 
-				<div className="text-sm text-center">
+				<div className="text-xs xs:text-sm text-center">
 					Already have an account?{" "}
 					<Link href="/login" className="hover:text-blue-300 underline underline-offset-4 transition-colors">
 						Login
