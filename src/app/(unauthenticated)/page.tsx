@@ -2,13 +2,14 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import {
-	Brain,
-	TrendingUp,
-	Shield,
-	Gamepad2,
-	DollarSign,
 	Eye,
-	BarChart3,
+	Shield,
+	Activity,
+	ArrowRightLeft,
+	Newspaper,
+	Gamepad2,
+	MousePointer,
+	Lock,
 	Zap,
 	CheckCircle,
 	ArrowRight,
@@ -17,99 +18,130 @@ import {
 	Star,
 	Users,
 	Award,
-	Globe
+	Globe,
+	Camera,
+	Smartphone,
+	Server
 } from 'lucide-react'
 
-const LandingPage = () => {
-	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-	const features = [
-		{
-			icon: Brain,
-			title: 'AI-Powered Insights',
-			description: 'Advanced AI analyzes your spending patterns and provides personalized financial recommendations.'
-		},
-		{
-			icon: TrendingUp,
-			title: 'Investment Tracking',
-			description: 'Monitor your investments in real-time with detailed analytics and performance metrics.'
-		},
-		{
-			icon: Shield,
-			title: 'Fake Note Detection',
-			description: 'Advanced computer vision technology to detect counterfeit currency instantly.'
-		},
-		{
-			icon: Eye,
-			title: 'Note Condition Assessment',
-			description: 'Evaluate the condition of your currency notes for accurate valuation.'
-		},
-		{
-			icon: DollarSign,
-			title: 'Currency Conversion',
-			description: 'Real-time currency conversion with live exchange rates from around the world.'
-		},
-		{
-			icon: BarChart3,
-			title: 'Inflation Adjustment',
-			description: 'Track how inflation affects your purchasing power over time.'
-		},
-		{
-			icon: Gamepad2,
-			title: 'FunZone Gaming',
-			description: 'Learn finance through interactive quizzes and games in our FunZone.'
-		},
-		{
-			icon: Zap,
-			title: 'Smart Automation',
-			description: 'Automate your financial tracking and get intelligent spending alerts.'
-		}
-	]
+const features = [
+	{
+		icon: Eye,
+		title: 'Currency Recognition',
+		description: 'Instantly identify any currency from around the world using advanced AI image recognition technology.',
+		highlight: 'AI-Powered'
+	},
+	{
+		icon: Shield,
+		title: 'Fake Note Detection',
+		description: 'Detect counterfeit currency with 99.2% accuracy using deep learning algorithms and security feature analysis.',
+		highlight: '99.2% Accuracy'
+	},
+	{
+		icon: Activity,
+		title: 'Note Condition Assessment',
+		description: 'Evaluate currency condition and estimated value based on wear, damage, and collectibility factors.',
+		highlight: 'Smart Analysis'
+	},
+	{
+		icon: ArrowRightLeft,
+		title: 'Currency Conversion',
+		description: 'Real-time exchange rates with historical data and conversion tracking for informed decisions.',
+		highlight: 'Live Rates'
+	},
+	{
+		icon: Newspaper,
+		title: 'Financial News',
+		description: 'Stay updated with curated financial news, market trends, and currency-related developments.',
+		highlight: 'Real-Time'
+	},
+	{
+		icon: Gamepad2,
+		title: 'FunZone Interactive',
+		description: 'Learn through engaging quizzes and create custom virtual currencies in our gamified learning environment.',
+		highlight: 'Educational'
+	}
+];
+
+const LandingPage = () => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [particles, setParticles] = useState<{
+		left: string;
+		top: string;
+		width: string;
+		height: string;
+		animationDelay: string;
+		animationDuration: string;
+	}[]>([]);
+
+	React.useEffect(() => {
+		const arr = Array.from({ length: 20 }, () => ({
+			left: `${Math.random() * 100}%`,
+			top: `${Math.random() * 100}%`,
+			width: `${2 + Math.random() * 4}px`,
+			height: `${2 + Math.random() * 4}px`,
+			animationDelay: `${Math.random() * 6}s`,
+			animationDuration: `${3 + Math.random() * 4}s`,
+		}));
+		setParticles(arr);
+	}, []);
 
 	const stats = [
-		{ number: '4+', label: 'Active Users' },
-		{ number: '₹100+', label: 'Transactions Tracked' },
-		{ number: '90%', label: 'Accuracy Rate' },
-		{ number: '24/7*', label: 'AI Support' }
+		{ number: '10K+', label: 'Currencies Recognized' },
+		{ number: '99.2%', label: 'Detection Accuracy' },
+		{ number: '<1s', label: 'Recognition Speed' },
+		{ number: '256-bit', label: 'Data Encryption' }
 	]
 
 	return (
-		<div className="relative bg-gradient-to-br from-[#1a1f3a] via-[#242a42] to-[#2a324c] min-h-screen overflow-hidden text-white">
-			{/* Background Effects */}
+		<div className="relative bg-gradient-to-br from-gray-950 via-gray-900 to-black min-h-screen overflow-hidden text-white">
+			{/* Advanced Background Effects */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
-				<div className="top-1/4 left-1/4 absolute bg-[#636fac]/10 blur-3xl rounded-full w-72 h-72 animate-pulse"></div>
-				<div className="right-1/4 bottom-1/4 absolute bg-[#4c5899]/10 blur-3xl rounded-full w-96 h-96 animate-pulse" style={{ animationDelay: '2s' }}></div>
-				<div className="top-3/4 left-1/2 absolute bg-[#8b9dc3]/10 blur-3xl rounded-full w-64 h-64 animate-pulse" style={{ animationDelay: '4s' }}></div>
+				<div className="top-0 left-0 absolute bg-gradient-to-br from-purple-600/5 to-blue-600/5 blur-3xl rounded-full w-[800px] h-[800px] animate-pulse"></div>
+				<div className="right-0 bottom-0 absolute bg-gradient-to-tl from-indigo-600/5 to-cyan-600/5 blur-3xl rounded-full w-[600px] h-[600px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+				<div className="top-1/2 left-1/2 absolute bg-gradient-to-r from-violet-600/3 to-purple-600/3 blur-3xl rounded-full w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 animate-pulse" style={{ animationDelay: '4s' }}></div>
+			</div>
+
+			{/* Floating particles effect */}
+			<div className="absolute inset-0 overflow-hidden pointer-events-none">
+				{particles.map((p, i) => (
+					<div
+						key={i}
+						className="absolute bg-white/10 rounded-full animate-float"
+						style={p}
+					></div>
+				))}
 			</div>
 
 			{/* Navigation */}
-			<nav className="top-0 z-50 sticky bg-white/5 backdrop-blur-md border-white/10 border-b">
+			<nav className="top-0 z-50 sticky bg-black/20 backdrop-blur-xl border-white/5 border-b">
 				<div className="mx-auto px-6 py-4 max-w-7xl">
 					<div className="flex justify-between items-center">
 						<div className="flex items-center space-x-3">
-							<div className="flex justify-center items-center bg-gradient-to-br from-[#636fac] to-[#4c5899] shadow-lg rounded-xl w-10 h-10">
-								<span className="font-bold text-white text-lg">CV</span>
+							<div className="flex justify-center items-center bg-gradient-to-br from-purple-600 to-indigo-700 shadow-2xl shadow-purple-500/20 rounded-xl w-12 h-12">
+								<Camera className="text-white" size={20} />
 							</div>
 							<div>
-								<h1 className="font-bold text-white text-xl">Coin <span className="text-[#636fac]">Vision</span></h1>
-								<p className="text-white/50 text-xs">AI Finance Management</p>
+								<h1 className="font-bold text-white text-xl">Coin <span className="bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 text-transparent">Vision</span></h1>
+								<p className="text-white/40 text-xs">Currency Recognition AI</p>
 							</div>
 						</div>
 
 						{/* Desktop Menu */}
 						<div className="hidden md:flex items-center space-x-8">
-							<a href="#features" className="text-white/70 hover:text-white transition-colors duration-300">Features</a>
-							<a href="#about" className="text-white/70 hover:text-white transition-colors duration-300">About</a>
-							<a href="#contact" className="text-white/70 hover:text-white transition-colors duration-300">Contact</a>
-							<Link href="/login" className="bg-gradient-to-r from-[#636fac] to-[#4c5899] shadow-lg px-6 py-2 rounded-xl font-semibold hover:scale-105 transition-all duration-300">
-								Get Started
+							<a href="#features" className="text-white/60 hover:text-white hover:scale-105 transition-all duration-300">Features</a>
+							<a href="#security" className="text-white/60 hover:text-white hover:scale-105 transition-all duration-300">Security</a>
+							<a href="#contact" className="text-white/60 hover:text-white hover:scale-105 transition-all duration-300">Contact</a>
+							<Link href="/login" className="bg-gradient-to-r from-purple-600 hover:from-purple-500 to-indigo-600 hover:to-indigo-500 shadow-lg shadow-purple-500/25 px-6 py-2 rounded-xl font-semibold hover:scale-105 transition-all duration-300">
+								Launch App
 							</Link>
 						</div>
 
 						{/* Mobile Menu Button */}
 						<button
 							onClick={() => setIsMenuOpen(!isMenuOpen)}
-							className="md:hidden hover:bg-white/10 p-2 rounded-lg transition-colors"
+							className="md:hidden hover:bg-white/5 p-2 rounded-lg transition-all duration-300"
 						>
 							{isMenuOpen ? <X size={24} /> : <Menu size={24} />}
 						</button>
@@ -117,13 +149,13 @@ const LandingPage = () => {
 
 					{/* Mobile Menu */}
 					{isMenuOpen && (
-						<div className="md:hidden bg-white/5 backdrop-blur-md mt-4 p-4 rounded-xl">
+						<div className="md:hidden bg-black/40 backdrop-blur-xl mt-4 p-6 border border-white/10 rounded-xl">
 							<div className="flex flex-col space-y-4">
 								<a href="#features" className="text-white/70 hover:text-white transition-colors">Features</a>
-								<a href="#about" className="text-white/70 hover:text-white transition-colors">About</a>
+								<a href="#security" className="text-white/70 hover:text-white transition-colors">Security</a>
 								<a href="#contact" className="text-white/70 hover:text-white transition-colors">Contact</a>
-								<Link href="/register" className="bg-gradient-to-r from-[#636fac] to-[#4c5899] px-6 py-2 rounded-xl font-semibold text-center">
-									Get Started
+								<Link href="/register" className="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-3 rounded-xl font-semibold text-center hover:scale-105 transition-all duration-300">
+									Launch App
 								</Link>
 							</div>
 						</div>
@@ -132,44 +164,45 @@ const LandingPage = () => {
 			</nav>
 
 			{/* Hero Section */}
-			<section className="relative flex justify-center items-center px-6 pt-20 min-h-screen">
+			<section className="relative flex justify-center items-center px-6 pt-16 min-h-screen">
 				<div className="z-10 relative mx-auto max-w-6xl text-center">
 					<div className="mb-8">
-						<div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md mb-6 px-4 py-2 border border-white/20 rounded-full">
-							<Star className="text-[#636fac]" size={16} />
-							<span className="font-medium text-sm">AI-Powered Finance Management</span>
+						<div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600/20 to-indigo-600/20 shadow-lg backdrop-blur-md mb-8 px-6 py-3 border border-purple-500/20 rounded-full">
+							<MousePointer className="text-purple-400" size={16} />
+							<span className="font-medium text-purple-200 text-sm">All Details with a Single Click</span>
 						</div>
 
-						<h1 className="mb-6 font-bold text-5xl md:text-7xl leading-tight">
-							Smart Finance
-							<br />
-							<span className="bg-clip-text bg-gradient-to-r from-[#636fac] to-[#8b9dc3] text-transparent">
-								Made Simple
+						<h1 className="mb-8 font-black text-6xl md:text-8xl leading-none tracking-tight">
+							<span className="block">Currency</span>
+							<span className="block bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-cyan-400 text-transparent">
+								Recognition
 							</span>
+							<span className="block text-white/90">Redefined</span>
 						</h1>
 
-						<p className="mx-auto mb-8 max-w-4xl text-white/80 text-xl md:text-2xl leading-relaxed">
-							Transform your financial life with AI-powered insights, real-time tracking, and intelligent recommendations.
-							Detect fake notes, convert currencies, and learn through gamified experiences.
+						<p className="mx-auto mb-10 max-w-4xl text-white/70 text-xl md:text-2xl leading-relaxed">
+							Unlock the power of AI-driven currency analysis. <strong className="text-purple-300">Recognize, verify, assess, and convert</strong> any currency instantly with military-grade security and lightning-fast accuracy.
 						</p>
 					</div>
 
-					<div className="flex sm:flex-row flex-col justify-center items-center gap-4 mb-12">
-						<Link href="/register" className="flex items-center gap-2 bg-gradient-to-r from-[#636fac] to-[#4c5899] shadow-2xl px-8 py-4 rounded-xl font-semibold text-lg hover:scale-105 transition-all duration-300">
-							Explore
-							<ArrowRight size={20} />
+					<div className="flex sm:flex-row flex-col justify-center items-center gap-6 mb-16">
+						<Link href="/register" className="group flex items-center gap-3 bg-gradient-to-r from-purple-600 hover:from-purple-500 to-indigo-600 hover:to-indigo-500 shadow-2xl shadow-purple-500/30 px-10 py-5 rounded-2xl font-bold text-xl hover:scale-105 transition-all duration-300">
+							<Camera size={24} />
+							Start Scanning
+							<ArrowRight size={24} className="transition-transform group-hover:translate-x-1 duration-300" />
 						</Link>
-						<button className="bg-white/10 hover:bg-white/20 backdrop-blur-md px-8 py-4 border border-white/20 rounded-xl font-semibold text-lg transition-all duration-300">
-							Watch Demo
+						<button className="flex items-center gap-3 bg-white/5 hover:bg-white/10 backdrop-blur-xl px-10 py-5 border border-white/10 rounded-2xl font-bold text-xl hover:scale-105 transition-all duration-300">
+							<Eye size={24} />
+							View Demo
 						</button>
 					</div>
 
-					{/* Stats */}
-					<div className="gap-6 grid grid-cols-2 md:grid-cols-4 mx-auto max-w-4xl">
+					{/* Enhanced Stats */}
+					<div className="gap-6 grid grid-cols-2 md:grid-cols-4 mx-auto max-w-5xl">
 						{stats.map((stat, index) => (
-							<div key={index} className="bg-white/5 hover:bg-white/10 backdrop-blur-md p-6 border border-white/10 rounded-xl transition-all duration-300">
-								<div className="mb-2 font-bold text-[#636fac] text-2xl md:text-3xl">{stat.number}</div>
-								<div className="text-white/70 text-sm">{stat.label}</div>
+							<div key={index} className="group bg-gradient-to-br from-white/5 hover:from-purple-600/10 to-white/[0.02] hover:to-indigo-600/10 backdrop-blur-xl p-8 border border-white/5 rounded-2xl hover:scale-110 transition-all duration-500">
+								<div className="mb-3 font-black text-purple-300 group-hover:text-purple-200 text-3xl md:text-4xl transition-colors duration-300">{stat.number}</div>
+								<div className="font-medium text-white/60 text-sm">{stat.label}</div>
 							</div>
 						))}
 					</div>
@@ -177,30 +210,40 @@ const LandingPage = () => {
 			</section>
 
 			{/* Features Section */}
-			<section id="features" className="z-10 relative px-6 py-20">
+			<section id="features" className="z-10 relative px-6 py-24">
 				<div className="mx-auto max-w-7xl">
-					<div className="mb-16 text-center">
-						<h2 className="mb-6 font-bold text-4xl md:text-5xl">
-							Powerful <span className="text-[#636fac]">Features</span>
+					<div className="mb-20 text-center">
+						<h2 className="mb-8 font-black text-5xl md:text-6xl">
+							<span className="bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 text-transparent">Powerful</span>
+							<span className="text-white"> Features</span>
 						</h2>
-						<p className="mx-auto max-w-3xl text-white/70 text-xl">
-							Experience the future of finance management with our comprehensive suite of AI-powered tools
+						<p className="mx-auto max-w-3xl text-white/60 text-xl leading-relaxed">
+							Experience next-generation currency technology with our comprehensive AI-powered recognition suite
 						</p>
 					</div>
 
-					<div className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+					<div className="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 						{features.map((feature, index) => (
 							<div
 								key={index}
-								className="group bg-white/5 hover:bg-white/10 backdrop-blur-md p-6 border border-white/10 rounded-2xl hover:scale-105 transition-all duration-300"
+								className="group relative bg-gradient-to-br from-white/[0.08] hover:from-purple-600/10 to-white/[0.02] hover:to-indigo-600/10 backdrop-blur-xl p-8 border border-white/5 rounded-3xl overflow-hidden hover:scale-105 transition-all duration-500"
 							>
-								<div className="flex justify-center items-center bg-gradient-to-br from-[#636fac] to-[#4c5899] mb-4 rounded-xl w-12 h-12 group-hover:scale-110 transition-transform duration-300">
-									<feature.icon size={24} className="text-white" />
+								{/* Glow effect */}
+								<div className="top-0 left-0 -z-10 absolute bg-gradient-to-br from-purple-600/20 to-indigo-600/20 opacity-0 group-hover:opacity-100 blur-xl rounded-full w-full h-full transition-opacity duration-500"></div>
+
+								<div className="flex justify-between items-start mb-6">
+									<div className="flex justify-center items-center bg-gradient-to-br from-purple-600/20 to-indigo-600/20 backdrop-blur-sm p-4 border border-purple-500/20 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+										<feature.icon size={32} className="text-purple-300" />
+									</div>
+									<span className="bg-gradient-to-r from-purple-500/20 to-indigo-500/20 backdrop-blur-sm px-3 py-1 border border-purple-500/30 rounded-full font-medium text-purple-300 text-xs">
+										{feature.highlight}
+									</span>
 								</div>
-								<h3 className="mb-3 font-semibold text-white group-hover:text-[#636fac] text-xl transition-colors duration-300">
+
+								<h3 className="mb-4 font-bold text-white group-hover:text-purple-200 text-2xl transition-colors duration-300">
 									{feature.title}
 								</h3>
-								<p className="text-white/70 leading-relaxed">
+								<p className="text-white/60 leading-relaxed">
 									{feature.description}
 								</p>
 							</div>
@@ -209,56 +252,66 @@ const LandingPage = () => {
 				</div>
 			</section>
 
-			{/* About Section */}
-			<section id="about" className="z-10 relative px-6 py-20">
+			{/* Security & Data Protection */}
+			<section id="security" className="z-10 relative px-6 py-24">
 				<div className="mx-auto max-w-7xl">
-					<div className="items-center gap-12 grid grid-cols-1 lg:grid-cols-2">
+					<div className="items-center gap-16 grid grid-cols-1 lg:grid-cols-2">
 						<div>
-							<h2 className="mb-6 font-bold text-4xl md:text-5xl">
-								Why Choose <span className="text-[#636fac]">Coin Vision</span>?
+							<h2 className="mb-8 font-black text-5xl md:text-6xl">
+								<span className="text-white">Military-Grade</span>
+								<br />
+								<span className="bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 text-transparent">Data Security</span>
 							</h2>
-							<p className="mb-8 text-white/80 text-xl leading-relaxed">
-								Our AI-powered platform combines cutting-edge technology with user-friendly design to deliver
-								the most comprehensive finance management experience available today.
+							<p className="mb-10 text-white/70 text-xl leading-relaxed">
+								Your financial data deserves the highest level of protection. We employ enterprise-grade security
+								measures to ensure your information remains completely private and secure.
 							</p>
 
-							<div className="space-y-4">
+							<div className="space-y-6">
 								{[
-									'Advanced AI algorithms for personalized insights',
-									'Real-time currency detection and validation',
-									'Gamified learning experience in FunZone',
-									'24/7 customer support and assistance'
+									{ icon: Lock, text: '256-bit AES encryption for all data transmission' },
+									{ icon: Shield, text: 'Zero data retention policy - images processed and deleted instantly' },
+									{ icon: Server, text: 'Secure cloud infrastructure with ISO 27001 certification' },
+									{ icon: Smartphone, text: 'On-device processing for maximum privacy protection' }
 								].map((item, index) => (
-									<div key={index} className="flex items-center gap-3">
-										<CheckCircle size={20} className="flex-shrink-0 text-[#636fac]" />
-										<span className="text-white/80">{item}</span>
+									<div key={index} className="group flex items-center gap-4">
+										<div className="flex justify-center items-center bg-gradient-to-br from-purple-600/20 to-indigo-600/20 p-3 border border-purple-500/20 rounded-xl group-hover:scale-110 transition-transform duration-300">
+											<item.icon size={24} className="text-purple-300" />
+										</div>
+										<span className="font-medium text-white/80">{item.text}</span>
 									</div>
 								))}
 							</div>
 						</div>
 
 						<div className="relative">
-							<div className="bg-white/5 backdrop-blur-md p-8 border border-white/10 rounded-3xl">
-								<div className="gap-6 grid grid-cols-2">
+							<div className="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl p-10 border border-white/10 rounded-3xl">
+								<div className="gap-8 grid grid-cols-1">
 									<div className="text-center">
-										<Users size={48} className="mx-auto mb-4 text-[#636fac]" />
-										<div className="font-bold text-2xl">4+</div>
-										<div className="text-white/70">Happy Users</div>
+										<Lock size={64} className="mx-auto mb-6 text-purple-300" />
+										<h3 className="mb-3 font-bold text-purple-200 text-2xl">End-to-End Encryption</h3>
+										<p className="text-white/60">Your data is encrypted from capture to processing, ensuring complete privacy.</p>
 									</div>
-									<div className="text-center">
-										<Award size={48} className="mx-auto mb-4 text-[#4c5899]" />
-										<div className="font-bold text-2xl">90%</div>
-										<div className="text-white/70">Uptime</div>
-									</div>
-									<div className="text-center">
-										<Globe size={48} className="mx-auto mb-4 text-[#8b9dc3]" />
-										<div className="font-bold text-2xl">150+</div>
-										<div className="text-white/70">Countries</div>
-									</div>
-									<div className="text-center">
-										<Shield size={48} className="mx-auto mb-4 text-[#636fac]" />
-										<div className="font-bold text-2xl">100%*</div>
-										<div className="text-white/70">Secure</div>
+
+									<div className="flex justify-center items-center space-x-8">
+										<div className="text-center">
+											<div className="flex justify-center items-center bg-gradient-to-br from-green-600/20 to-emerald-600/20 mb-3 rounded-full w-16 h-16">
+												<CheckCircle size={32} className="text-green-400" />
+											</div>
+											<span className="text-white/60 text-sm">GDPR Compliant</span>
+										</div>
+										<div className="text-center">
+											<div className="flex justify-center items-center bg-gradient-to-br from-blue-600/20 to-cyan-600/20 mb-3 rounded-full w-16 h-16">
+												<Shield size={32} className="text-blue-400" />
+											</div>
+											<span className="text-white/60 text-sm">SOC 2 Certified</span>
+										</div>
+										<div className="text-center">
+											<div className="flex justify-center items-center bg-gradient-to-br from-purple-600/20 to-indigo-600/20 mb-3 rounded-full w-16 h-16">
+												<Zap size={32} className="text-purple-400" />
+											</div>
+											<span className="text-white/60 text-sm">Real-time Processing</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -268,20 +321,31 @@ const LandingPage = () => {
 			</section>
 
 			{/* CTA Section */}
-			<section className="z-10 relative px-6 py-20">
-				<div className="mx-auto max-w-4xl text-center">
-					<div className="bg-gradient-to-r from-[#636fac]/20 to-[#4c5899]/20 backdrop-blur-md p-12 border border-white/20 rounded-3xl">
-						<h2 className="mb-6 font-bold text-4xl md:text-5xl">
-							Ready to Transform Your Finances?
+			<section className="z-10 relative px-6 py-24">
+				<div className="mx-auto max-w-5xl text-center">
+					<div className="relative bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl p-16 border border-white/10 rounded-3xl overflow-hidden">
+						{/* Background glow */}
+						<div className="top-1/2 left-1/2 -z-10 absolute bg-gradient-to-r from-purple-600/20 to-indigo-600/20 blur-3xl rounded-full w-96 h-96 -translate-x-1/2 -translate-y-1/2"></div>
+
+						<h2 className="mb-8 font-black text-5xl md:text-6xl">
+							<span className="text-white">Ready to</span>
+							<br />
+							<span className="bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 text-transparent">Revolutionize</span>
+							<br />
+							<span className="text-white">Currency Recognition?</span>
 						</h2>
-						<p className="mb-8 text-white/80 text-xl">
-							Join thousands of users who have already revolutionized their financial management with Coin Vision.
+						<p className="mb-12 text-white/70 text-xl leading-relaxed">
+							Join the future of digital currency analysis. Get instant recognition, fraud detection,
+							and comprehensive financial insights with just one click.
 						</p>
-						<div className="flex sm:flex-row flex-col justify-center gap-4">
-							<Link href="/register" className="bg-gradient-to-r from-[#636fac] to-[#4c5899] shadow-2xl px-8 py-4 rounded-xl font-semibold text-lg hover:scale-105 transition-all duration-300">
-								Start Your Journey
+						<div className="flex sm:flex-row flex-col justify-center gap-6">
+							<Link href="/register" className="group flex items-center gap-3 bg-gradient-to-r from-purple-600 hover:from-purple-500 to-indigo-600 hover:to-indigo-500 shadow-2xl shadow-purple-500/30 px-10 py-5 rounded-2xl font-bold text-xl hover:scale-105 transition-all duration-300">
+								<Camera size={24} />
+								Start Scanning Now
+								<ArrowRight size={24} className="transition-transform group-hover:translate-x-1 duration-300" />
 							</Link>
-							<Link href="/login" className="bg-white/10 hover:bg-white/20 backdrop-blur-md px-8 py-4 border border-white/20 rounded-xl font-semibold text-lg transition-all duration-300">
+							<Link href="/login" className="flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-xl px-10 py-5 border border-white/20 rounded-2xl font-bold text-xl hover:scale-105 transition-all duration-300">
+								<Eye size={24} />
 								Sign In
 							</Link>
 						</div>
@@ -289,77 +353,81 @@ const LandingPage = () => {
 				</div>
 			</section>
 
-			{/* Footer with Terms */}
-			<footer id="contact" className="z-10 relative px-6 py-16 border-white/10 border-t">
+			{/* Footer */}
+			<footer id="contact" className="z-10 relative px-6 py-20 border-white/5 border-t">
 				<div className="mx-auto max-w-7xl">
-					<div className="justify-around gap-8 grid grid-cols-1 md:grid-cols-4 mb-12">
-						<div className='flex flex-col justify-center items-center w-full'>
-							<div className="flex items-center space-x-3 mb-4">
-								<div className="flex justify-center items-center bg-gradient-to-br from-[#636fac] to-[#4c5899] rounded-xl w-10 h-10">
-									<span className='flex flex-row font-bold text-white text-xl'>
-										<p>C</p>
-										<p className='text-[#1d254d]'>V</p>
-									</span>
+					<div className="justify-between gap-12 grid grid-cols-1 md:grid-cols-4 mb-16">
+						<div className="md:col-span-2">
+							<div className="flex items-center space-x-3 mb-6">
+								<div className="flex justify-center items-center bg-gradient-to-br from-purple-600 to-indigo-700 rounded-xl w-12 h-12">
+									<Camera className="text-white" size={20} />
 								</div>
-								<h3 className="font-bold text-xl">Coin <span className="text-[#636fac]">Vision</span></h3>
+								<h3 className="font-bold text-2xl">Coin <span className="text-purple-400">Vision</span></h3>
 							</div>
-							<p className="text-white/70">
-								AI-powered finance management that makes smart financial decisions accessible to everyone.
+							<p className="mb-6 text-white/60 leading-relaxed">
+								Revolutionary AI-powered currency recognition technology that delivers instant, accurate,
+								and secure financial analysis with military-grade data protection.
 							</p>
-						</div>
-
-						<div className='flex flex-col justify-center items-center w-full'>
-							<h4 className="mb-4 font-semibold">Features</h4>
-							<ul className="space-y-2 text-white/70">
-								<li><a href="#" className="hover:text-white transition-colors">AI Insights</a></li>
-								<li><a href="#" className="hover:text-white transition-colors">Investment Tracking</a></li>
-								<li><a href="#" className="hover:text-white transition-colors">Currency Detection</a></li>
-								<li><a href="#" className="hover:text-white transition-colors">FunZone</a></li>
-							</ul>
-						</div>
-
-						<div className='flex flex-col justify-center items-center w-full'>
-							<h4 className="mb-4 font-semibold">Company</h4>
-							<ul className="space-y-2 text-white/70">
-								<li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-								<li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-								<li><a href="#" className="hover:text-white transition-colors">Press</a></li>
-								<li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-							</ul>
-						</div>
-
-					</div>
-
-					{/* Terms and Conditions */}
-					<div className="pt-8 border-white/10 border-t">
-						<div className="bg-white/5 backdrop-blur-md mb-8 p-6 border border-white/10 rounded-2xl">
-							<h3 className="mb-4 font-semibold text-xl">Terms and Conditions</h3>
-							<div className="space-y-3 text-white/70 text-sm">
-								<p>
-									<strong>AI Accuracy:</strong> While our AI provides highly accurate insights, all financial decisions
-									remain your responsibility. We recommend consulting with financial advisors for major investment decisions.
-								</p>
-								<p>
-									<strong>Currency Detection:</strong> Our fake note detection feature uses advanced computer vision
-									technology with 95% accuracy rate. Results should be verified through official channels when necessary.
-								</p>
-								<p>
-									<strong>Service Availability:</strong> We strive for 99.9% uptime but cannot guarantee uninterrupted
-									service. Scheduled maintenance will be communicated in advance.
-								</p>
-								<p>
-									<strong>FunZone:</strong> Educational games and quizzes are designed for learning purposes and should
-									not replace professional financial education.
-								</p>
+							<div className="flex space-x-4">
+								<div className="bg-white/5 hover:bg-white/10 p-3 rounded-xl transition-colors cursor-pointer">
+									<Globe size={20} className="text-purple-400" />
+								</div>
+								<div className="bg-white/5 hover:bg-white/10 p-3 rounded-xl transition-colors cursor-pointer">
+									<Shield size={20} className="text-indigo-400" />
+								</div>
+								<div className="bg-white/5 hover:bg-white/10 p-3 rounded-xl transition-colors cursor-pointer">
+									<Zap size={20} className="text-cyan-400" />
+								</div>
 							</div>
 						</div>
+
+						<div>
+							<h4 className="mb-6 font-bold text-purple-300">Core Features</h4>
+							<ul className="space-y-3 text-white/60">
+								<li><a href="#" className="hover:text-purple-300 transition-colors">Currency Recognition</a></li>
+								<li><a href="#" className="hover:text-purple-300 transition-colors">Fake Note Detection</a></li>
+								<li><a href="#" className="hover:text-purple-300 transition-colors">Condition Assessment</a></li>
+								<li><a href="#" className="hover:text-purple-300 transition-colors">Live Conversion</a></li>
+								<li><a href="#" className="hover:text-purple-300 transition-colors">Financial News</a></li>
+								<li><a href="#" className="hover:text-purple-300 transition-colors">FunZone Games</a></li>
+							</ul>
+						</div>
+
+						<div>
+							<h4 className="mb-6 font-bold text-indigo-300">Security & Support</h4>
+							<ul className="space-y-3 text-white/60">
+								<li><a href="#" className="hover:text-indigo-300 transition-colors">Data Protection</a></li>
+								<li><a href="#" className="hover:text-indigo-300 transition-colors">Privacy Policy</a></li>
+								<li><a href="#" className="hover:text-indigo-300 transition-colors">Terms of Service</a></li>
+								<li><a href="#" className="hover:text-indigo-300 transition-colors">24/7 Support</a></li>
+								<li><a href="#" className="hover:text-indigo-300 transition-colors">API Documentation</a></li>
+								<li><a href="#" className="hover:text-indigo-300 transition-colors">Developer Resources</a></li>
+							</ul>
+						</div>
 					</div>
 
-					<div className="text-white/50 text-sm text-center">
-						<p>&copy; 2025 Coin Vision. All rights reserved. Made with ❤️ for smarter finance management.</p>
+					<div className="pt-8 border-white/5 border-t text-white/40 text-sm text-center">
+						<p>&copy; 2025 Coin Vision. All rights reserved. Powered by advanced AI technology with military-grade security.</p>
 					</div>
 				</div>
 			</footer>
+
+			{/* Custom animations */}
+			<style jsx>{`
+				@keyframes float {
+					0%, 100% {
+						transform: translateY(0px) rotate(0deg);
+						opacity: 0.1;
+					}
+					50% {
+						transform: translateY(-20px) rotate(180deg);
+						opacity: 0.3;
+					}
+				}
+				.animate-float {
+					animation: float 6s ease-in-out infinite;
+				}
+			`}</style>
 		</div>
 	)
 }

@@ -82,7 +82,7 @@ const NavBar = () => {
 								<h1 className='font-bold text-white text-xl tracking-tight'>Coin</h1>
 								<h1 className='font-bold text-[#636fac] text-xl tracking-tight'>Vision</h1>
 							</div>
-							<p className='text-white/50 text-xs'>Financial Tool</p>
+							<p className='text-white/50 text-xs'>Currency Tool</p>
 						</div>
 					</div>
 
