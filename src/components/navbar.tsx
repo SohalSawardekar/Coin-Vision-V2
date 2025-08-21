@@ -48,6 +48,7 @@ const NavBar = () => {
 	React.useEffect(() => {
 		const fetchUser = async () => {
 			const { data: { user }, error } = await supabase.auth.getUser()
+			console.log(user)
 			if (error) {
 				console.error('Error fetching user:', error)
 			} else {
@@ -123,12 +124,16 @@ const NavBar = () => {
 						<DropdownMenu>
 							<DropdownMenuTrigger className='group flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-xl transition-all duration-200'>
 								<Avatar className="ring-2 ring-white/20 ring-offset-2 ring-offset-transparent w-8 h-8">
-									<AvatarImage src={`${userData?.user_metadata?.avatar_url}`} />
-									<AvatarFallback className="bg-gradient-to-br from-[#636fac] to-[#4c5899] font-semibold text-white">{userData?.user_metadata?.name[0].toString()}</AvatarFallback>
+									<AvatarImage src={userData?.user_metadata?.avatar_url || undefined} />
+									<AvatarFallback className="bg-gradient-to-br from-[#636fac] to-[#4c5899] font-semibold text-white">
+										{userData?.user_metadata?.display_name && typeof userData.user_metadata.display_name === 'string' && userData.user_metadata.display_name.length > 0
+											? userData.user_metadata.display_name[0].toUpperCase()
+											: <User size={16} />}
+									</AvatarFallback>
 								</Avatar>
 								<div className="hidden sm:flex flex-col items-start">
-									<span className="font-medium text-white text-sm">{userData?.user_metadata?.name}</span>
-									<span className="text-white/50 text-xs">{userData?.user_metadata?.email}</span>
+									<span className="font-medium text-white text-sm">{userData?.user_metadata?.display_name || 'User'}</span>
+									<span className="text-white/50 text-xs">{userData?.user_metadata?.email || ''}</span>
 								</div>
 								<ChevronDown size={16} className="text-white/50 group-hover:text-white transition-colors duration-200" />
 							</DropdownMenuTrigger>
