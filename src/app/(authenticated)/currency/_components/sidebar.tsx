@@ -1,3 +1,4 @@
+'use client'
 import * as React from "react"
 import { Wallet2, StickyNote, AlertCircleIcon, ArrowLeftRightIcon } from "lucide-react"
 import {
@@ -8,6 +9,7 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
+	useSidebar,
 } from "@/components/ui/sidebar"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
@@ -38,6 +40,7 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+	const { setOpen } = useSidebar()
 	return (
 		<Sidebar variant="floating" {...props} className="relative">
 			<SidebarHeader >
@@ -54,7 +57,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 						{data.navMain.map((item) => (
 							<SidebarMenuItem key={item.title}>
 								<SidebarMenuButton asChild>
-									<Link href={item.url} className="flex flex-row gap-1 font-medium hover:scale-105 transition-transform duration-200">
+									<Link
+										href={item.url}
+										className="flex flex-row gap-1 font-medium hover:scale-105 transition-transform duration-200"
+										onClick={() => {
+											setTimeout(() => {
+												setOpen(false)
+											}, 500);
+										}}>
 										{item.symbol && <item.symbol className="inline-block mr-2" />}
 										<p className="text-medium">{item.title}</p>
 									</Link>

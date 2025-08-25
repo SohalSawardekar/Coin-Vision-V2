@@ -144,7 +144,7 @@ export default function Dashboard() {
 			if (parsedPred) {
 				// Inflation
 				const fredSeries = FRED_SERIES[parsedPred.code] || FRED_SERIES["USD"];
-				const res = await fetch(`/api/fred?series_id=${fredSeries}`);
+				const res = await fetch(`/api/fred?series_id=FPCPITOTLZGUSA`);
 				const data = await res.json();
 				setInflation(transformFredData(data.observations));
 			}
@@ -322,7 +322,7 @@ export default function Dashboard() {
 				</div>
 
 				{/* Right column: conversions + charts */}
-				<div className="space-y-6 lg:grid lg:grid-rows-2">
+				<div className="flex flex-col space-y-6">
 					{conversionError.error ? (
 						<div className="flex flex-col justify-center items-center bg-red-500/10 p-6 border border-red-500/20 rounded-2xl h-full text-red-400 text-center">
 
@@ -434,6 +434,7 @@ export default function Dashboard() {
 								</div>
 							) : (
 								< InflationChart
+									todayValue={baseAmount}
 									country={gemini?.country ?? baseCode}
 									data={inflation}
 									loading={loadingRates}

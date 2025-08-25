@@ -14,13 +14,13 @@ export default function ConversionTable({
 	ratesLoaded: boolean;
 }) {
 	return (
-		<div className="bg-white/5 p-4 border border-white/10 rounded-2xl">
+		<div className="bg-white/5 p-6 border border-white/10 rounded-2xl">
 			<div className="flex justify-between items-center mb-2">
 				<h3 className="font-semibold">Conversions</h3>
 				<span className="opacity-60 text-xs">Base: {baseAmount} {baseCode}</span>
 			</div>
 			{!ratesLoaded ? (
-				<div className="flex justify-center items-center gap-3 bg-blue-500/10 p-4 border border-blue-500/20 rounded-2xl w-full h-[90%] text-blue-400 text-sm">
+				<div className="flex justify-center items-center gap-3 bg-blue-500/10 p-4 border border-blue-500/20 rounded-2xl w-full text-blue-400 text-sm">
 					{/* Hourglass Icon */}
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
