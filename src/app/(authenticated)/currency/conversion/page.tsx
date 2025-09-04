@@ -170,7 +170,7 @@ const CurrencyConverter = () => {
 			for (let i = 29; i >= 0; i--) {
 				const date = new Date();
 				date.setDate(date.getDate() - i);
-				const variation = (Math.random() - 0.5) * 0.1; // ±5% variation
+				const variation = (Math.random() - 0.2) * 0.01; // ±2% variation
 				const rate = baseRate * (1 + variation);
 
 				data.push({

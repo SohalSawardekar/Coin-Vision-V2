@@ -9,19 +9,12 @@ import {
 	Newspaper,
 	Gamepad2,
 	MousePointer,
-	Lock,
 	Zap,
-	CheckCircle,
 	ArrowRight,
 	Menu,
 	X,
-	Star,
-	Users,
-	Award,
 	Globe,
-	Camera,
-	Smartphone,
-	Server
+	Camera
 } from 'lucide-react'
 
 
@@ -88,10 +81,10 @@ const LandingPage = () => {
 	}, []);
 
 	const stats = [
-		{ number: '10K+', label: 'Currencies Recognized' },
-		{ number: '99.2%', label: 'Detection Accuracy' },
-		{ number: '<1s', label: 'Recognition Speed' },
-		{ number: '256-bit', label: 'Data Encryption' }
+		{ number: '10K+', label: 'Trained on Images' },
+		{ number: '99%', label: 'Detection Accuracy' },
+		{ number: 'fast', label: 'Recognition Speed' },
+		{ number: '24/7', label: 'Runtime' }
 	]
 
 	return (
@@ -131,7 +124,6 @@ const LandingPage = () => {
 						{/* Desktop Menu */}
 						<div className="hidden md:flex items-center space-x-8">
 							<a href="#features" className="text-white/60 hover:text-white hover:scale-105 transition-all duration-300">Features</a>
-							<a href="#security" className="text-white/60 hover:text-white hover:scale-105 transition-all duration-300">Security</a>
 							<a href="#contact" className="text-white/60 hover:text-white hover:scale-105 transition-all duration-300">Contact</a>
 							<Link href="/login" className="bg-gradient-to-r from-purple-600 hover:from-purple-500 to-indigo-600 hover:to-indigo-500 shadow-lg shadow-purple-500/25 px-6 py-2 rounded-xl font-semibold hover:scale-105 transition-all duration-300">
 								Launch App
@@ -181,7 +173,7 @@ const LandingPage = () => {
 						</h1>
 
 						<p className="mx-auto mb-10 max-w-4xl text-white/70 text-xl md:text-2xl leading-relaxed">
-							Unlock the power of AI-driven currency analysis. <strong className="text-purple-300">Recognize, verify, assess, and convert</strong> any currency instantly with military-grade security and lightning-fast accuracy.
+							Unlock the power of AI-driven currency analysis. <strong className="text-purple-300">Recognize, verify, assess, and convert</strong> any currency instantly with security and fast accuracy.
 						</p>
 					</div>
 
@@ -191,10 +183,6 @@ const LandingPage = () => {
 							Start Scanning
 							<ArrowRight size={24} className="transition-transform group-hover:translate-x-1 duration-300" />
 						</Link>
-						<button className="flex items-center gap-3 bg-white/5 hover:bg-white/10 backdrop-blur-xl px-10 py-5 border border-white/10 rounded-2xl font-bold text-xl hover:scale-105 transition-all duration-300">
-							<Eye size={24} />
-							View Demo
-						</button>
 					</div>
 
 					{/* Enhanced Stats */}
@@ -252,73 +240,6 @@ const LandingPage = () => {
 				</div>
 			</section>
 
-			{/* Security & Data Protection */}
-			<section id="security" className="z-10 relative px-6 py-24">
-				<div className="mx-auto max-w-7xl">
-					<div className="items-center gap-16 grid grid-cols-1 lg:grid-cols-2">
-						<div>
-							<h2 className="mb-8 font-black text-5xl md:text-6xl">
-								<span className="text-white">Military-Grade</span>
-								<br />
-								<span className="bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 text-transparent">Data Security</span>
-							</h2>
-							<p className="mb-10 text-white/70 text-xl leading-relaxed">
-								Your financial data deserves the highest level of protection. We employ enterprise-grade security
-								measures to ensure your information remains completely private and secure.
-							</p>
-
-							<div className="space-y-6">
-								{[
-									{ icon: Lock, text: '256-bit AES encryption for all data transmission' },
-									{ icon: Shield, text: 'Zero data retention policy - images processed and deleted instantly' },
-									{ icon: Server, text: 'Secure cloud infrastructure with ISO 27001 certification' },
-									{ icon: Smartphone, text: 'On-device processing for maximum privacy protection' }
-								].map((item, index) => (
-									<div key={index} className="group flex items-center gap-4">
-										<div className="flex justify-center items-center bg-gradient-to-br from-purple-600/20 to-indigo-600/20 p-3 border border-purple-500/20 rounded-xl group-hover:scale-110 transition-transform duration-300">
-											<item.icon size={24} className="text-purple-300" />
-										</div>
-										<span className="font-medium text-white/80">{item.text}</span>
-									</div>
-								))}
-							</div>
-						</div>
-
-						<div className="relative">
-							<div className="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl p-10 border border-white/10 rounded-3xl">
-								<div className="gap-8 grid grid-cols-1">
-									<div className="text-center">
-										<Lock size={64} className="mx-auto mb-6 text-purple-300" />
-										<h3 className="mb-3 font-bold text-purple-200 text-2xl">End-to-End Encryption</h3>
-										<p className="text-white/60">Your data is encrypted from capture to processing, ensuring complete privacy.</p>
-									</div>
-
-									<div className="flex justify-center items-center space-x-8">
-										<div className="text-center">
-											<div className="flex justify-center items-center bg-gradient-to-br from-green-600/20 to-emerald-600/20 mb-3 rounded-full w-16 h-16">
-												<CheckCircle size={32} className="text-green-400" />
-											</div>
-											<span className="text-white/60 text-sm">GDPR Compliant</span>
-										</div>
-										<div className="text-center">
-											<div className="flex justify-center items-center bg-gradient-to-br from-blue-600/20 to-cyan-600/20 mb-3 rounded-full w-16 h-16">
-												<Shield size={32} className="text-blue-400" />
-											</div>
-											<span className="text-white/60 text-sm">SOC 2 Certified</span>
-										</div>
-										<div className="text-center">
-											<div className="flex justify-center items-center bg-gradient-to-br from-purple-600/20 to-indigo-600/20 mb-3 rounded-full w-16 h-16">
-												<Zap size={32} className="text-purple-400" />
-											</div>
-											<span className="text-white/60 text-sm">Real-time Processing</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
 
 			{/* CTA Section */}
 			<section className="z-10 relative px-6 py-24">
@@ -388,26 +309,20 @@ const LandingPage = () => {
 								<li><a href="#" className="hover:text-purple-300 transition-colors">Fake Note Detection</a></li>
 								<li><a href="#" className="hover:text-purple-300 transition-colors">Condition Assessment</a></li>
 								<li><a href="#" className="hover:text-purple-300 transition-colors">Live Conversion</a></li>
+							</ul>
+						</div>
+						<div>
+							<h4 className="mb-6 font-bold text-purple-300">Minor Features</h4>
+							<ul className="space-y-3 text-white/60">
 								<li><a href="#" className="hover:text-purple-300 transition-colors">Financial News</a></li>
 								<li><a href="#" className="hover:text-purple-300 transition-colors">FunZone Games</a></li>
 							</ul>
 						</div>
 
-						<div>
-							<h4 className="mb-6 font-bold text-indigo-300">Security & Support</h4>
-							<ul className="space-y-3 text-white/60">
-								<li><a href="#" className="hover:text-indigo-300 transition-colors">Data Protection</a></li>
-								<li><a href="#" className="hover:text-indigo-300 transition-colors">Privacy Policy</a></li>
-								<li><a href="#" className="hover:text-indigo-300 transition-colors">Terms of Service</a></li>
-								<li><a href="#" className="hover:text-indigo-300 transition-colors">24/7 Support</a></li>
-								<li><a href="#" className="hover:text-indigo-300 transition-colors">API Documentation</a></li>
-								<li><a href="#" className="hover:text-indigo-300 transition-colors">Developer Resources</a></li>
-							</ul>
-						</div>
 					</div>
 
 					<div className="pt-8 border-white/5 border-t text-white/40 text-sm text-center">
-						<p>&copy; 2025 Coin Vision. All rights reserved. Powered by advanced AI technology with military-grade security.</p>
+						<p>&copy; 2025 Coin Vision. All rights reserved. Powered by advanced AI technology with high level security.</p>
 					</div>
 				</div>
 			</footer>
